@@ -5,7 +5,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Login</h1>
+    <h1>Register</h1>
     <form action="/auth/register" method="post">
     {{csrf_field()}}
     <div class="list-group">
