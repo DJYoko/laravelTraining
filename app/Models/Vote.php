@@ -1,10 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 use Carbon\Carbon;
-
 use Illuminate\Database\Eloquent\Model;
-
 
 /*
  * Class Vote
@@ -20,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon created_at
  * @property Carbon updated_at
  */
+
 class Vote extends Model
 {
     protected $tables = 'votes';
