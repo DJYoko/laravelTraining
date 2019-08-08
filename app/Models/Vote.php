@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
  * Class Vote
  * @package App\Models
  *
- * @property int
  * @property int id
  * @property int user_id
  * @property string name
@@ -39,9 +38,7 @@ class Vote extends Model
     protected $casts = [
         'user_id'=> 'int',
         'name' => 'string',
-        'description'=> 'text',
-        'start_at'=> 'datetime',
-        'end_at'=> 'datetime'
+        'description'=> 'text'
     ];
 
     /**
