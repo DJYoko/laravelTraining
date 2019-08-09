@@ -11,10 +11,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
         // generate relational data (Vote & Vote Choice)
         $vote_id = $this->call(VoteTableSeeder::class);
-        $this->call(VoteChoicesTableSeeder::class,$vote_id);
+
+        // Vote choice(s) should be multiple
+        $random_number = rand(3,8);
+        $counter =0;
+        while($counter < $random_number){
+            $counter++;
+            $this->call(VoteChoicesTableSeeder::class,$vote_id);
+        }
 
     }
 
