@@ -42,7 +42,7 @@ class Vote extends Model
     ];
 
     /**
-     * blank field becomes Null
+     * blank field filled as Null
      */
     public static function boot()
     {
@@ -50,7 +50,7 @@ class Vote extends Model
         static::saving( function ( $model ) {
             foreach ( $model->attributes as $key => $value ) {
                 // accept Zero("0") on Numeric & Text field
-                if( $value != 0 ) {
+                if( $value !== 0 ) {
                     $model->{$key} = empty( $value ) ? null : $value;
                 }
             }
