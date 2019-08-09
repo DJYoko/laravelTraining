@@ -15,13 +15,13 @@ class VoteTableSeeder extends Seeder
     public function run()
     {
 
-        $currentDate = new Carbon();
+        $current_date = new Carbon();
         $vote = new Vote();
         $vote->user_id = 1;
         $vote->name = 'sample vote';
-        $vote->description = 'this item is created by seeder. on'.$currentDate;
-        $vote->start_at = $currentDate;
-        $vote->end_at = $currentDate;
+        $vote->description = 'this item is created by seeder. on'.$current_date;
+        $vote->start_at = $current_date;
+        $vote->end_at = $current_date;
         $vote->save();
         return $vote->id;
     }
