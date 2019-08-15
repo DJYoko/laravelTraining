@@ -1,0 +1,108 @@
+swagger: "2.0"
+info:
+  description: "This is a sample VoteService server. Demo API definition runs for localhost:3500 (runs on Docker)."
+  version: "1.0.0"
+  title: "VoteService"
+  termsOfService: ""
+## contact:
+## email: "vote@vote.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:3500"
+basePath: "/api"
+tags:
+- name: "Vote"
+  description: "Everything about your Votes"
+##  externalDocs:
+##    description: "Find out more"
+##    url: "https://docs.vote.com"
+- name: "user"
+  description: "Operations about user"
+##  externalDocs:
+##    description: "Find out more about our user"
+##    url: "https://docs.vote.com"
+schemes:
+- "https"
+- "http"
+paths:
+  /vote:
+    post:
+      tags:
+      - "Vote"
+      summary: "create new Vote(s)"
+      description: ""
+      operationId: "createVote(s)"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Vote object that needs to be created"
+        required: true
+        schema:
+          $ref: "#/definitions/Vote"
+      responses:
+        405:
+          description: "Invalid input"
+    put:
+      tags:
+      - "Vote"
+      summary: "Update existing Vote(s)"
+      description: ""
+      operationId: "update Vote"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Vote object that needs to be created to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Vote"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Vote not found"
+        405:
+          description: "Validation exception"
+definitions:
+  Vote:
+    type: "object"
+    required:
+    - "name"
+    - "user_id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+        example: "which food do you like??"
+      user_id:
+        type: "integer"
+        format: "int64"
+    xml:
+      name: "Vote"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
