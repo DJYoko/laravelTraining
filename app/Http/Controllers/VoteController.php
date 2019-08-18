@@ -15,21 +15,28 @@ class VoteController extends Controller
      */
     public function index()
     {
-
-        $currentDatetime = Carbon::now();
-
-        // pattern 1: start & end is defined
-        $query = Vote::where( 'votes.start_at', '<=', $currentDatetime );
-        $query = Vote::where( 'votes.end_at', '>=', $currentDatetime );
-
-        // pattern 2 : start & end is not defined
-        $query = Vote::whereIsNull( 'votes.start_at');
-        $query = Vote::whereIsNull( 'votes.end_at');
-
-        //TODO  settle pattern 1&2 as "orWhere"
+        $query = Vote::Select('*');
+        $query->where(function($query){
+            $query
+                ->where(
+                    // pattern 1: start & end is defined, and TODAY is between them.
+                    function($query){
+                        $currentDatetime = Carbon::now();
+                        $query->where( 'votes.start_at', '<=', $currentDatetime );
+                        $query->where( 'votes.end_at',   '>=', $currentDatetime );
+                    }
+                )->orWhere(
+                    function($query) {
+                        // pattern 2 : start & end is not defined
+                        $query->whereNull( 'votes.start_at');
+                        $query->whereNull( 'votes.end_at');
+                    }
+                );
+        });
 
         $votes = $query->get();
-        return $answer;
+        return $votes;
+        // return view('welcome');
     }
 
     /**
