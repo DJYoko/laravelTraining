@@ -16,6 +16,11 @@ class VoteController extends Controller
     public function index()
     {
         $query = Vote::Select('*');
+
+        //TODO
+        // add keyword filter
+        // add user filter
+
         $query->where(function($query){
             $query
                 ->where(
