@@ -35,8 +35,7 @@ class VoteController extends Controller
         });
 
         $votes = $query->get();
-        return $votes;
-        // return view('welcome');
+        return response()->json( [ "result" => "success", "votes" => $votes ] );
     }
 
     /**
