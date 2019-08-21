@@ -1,10 +1,10 @@
-# Laravel Study
+# Laravel Training
 
 ## Content
-a sample application for Vote any content.
+a sample application for Vote.
 (ex: what is your favorite food??).
 
-## what I Study
+## What I Learned
 - Laravel basic setup
 - migrates
 - Seeder
@@ -14,15 +14,17 @@ a sample application for Vote any content.
 - Auth
 - Model
 
-## version & environment
+## Version & Environment
 - Laravel: 5.8.18
 - PHP: 7.3.5
 - MySQL: 8.0.15
+- nginx
+- Editor: Visual Studio Codes
 
-## DBs
-- migrations (Laravel Standard)
-- password_resets (Laravel Standard)
-- users (Laravel Standard)
+## DB
+- (Laravel Standard) migrations
+- (Laravel Standard) password_resets
+- (Laravel Standard) users
 - votes
 - votes_choices
 - user_votes
