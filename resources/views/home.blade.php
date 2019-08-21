@@ -34,9 +34,44 @@
         const createForm = $('#vote-create-form');
         const csrf = createForm.find('input[name="_token"]').val();
 
+        createForm.find('.btn').on('click', function(){
+            createVotes();
+        })
 
+        const createVotes = function(){
+
+        const votes = [];
+
+        votes[0] = {
+            name: 'sample1 name',
+            description: 'sample1 description'
+        };
+        votes[1] = {
+            name: 'sample2 name',
+            description: 'sample2 description'
+        };
+
+        console.log(votes);
+
+        $.ajax( {
+            url: '/api/votes',
+            method: 'post',
+            data: {
+                votes: votes
+            },
+            dataType: 'json',
+            headers: {
+                'X-CSRF-TOKEN': csrf
+            },
+            success: function(data) {
+                console.log(data)
+            },
+            error: function(data) {
+                console.log(data)
+            }
+        });
+        }
     });
-
 
 </script>
 
