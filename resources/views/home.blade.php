@@ -8,7 +8,6 @@
 
   <div class='bg-light p-3 mb-3'>
     <form id='vote-create-form'>
-        @csrf
         <button class='btn btn-primary' type='button'>
         Create
         </button>
@@ -16,21 +15,21 @@
   </div>
 
   <div class='bg-light p-3 mb-3'>
-  <button class='btn btn-primary' type='button' id='get-data-button'>
-        Get
-    </button>
-    <pre id='get-result'></pre>
-</div>
-
-<div class='bg-light p-3 mb-3'>
     <form id='vote-delete-form'>
-        @csrf
         <input class='form-control' type='text' id='delete-target-ids'>
         <button class='btn btn-primary' type='button'>
-        Create
+        delete
         </button>
     </form>
   </div>
+
+  <div class='bg-light p-3 mb-3'>
+    <button class='btn btn-primary' type='button' id='get-data-button'>
+            Get
+    </button>
+    <pre id='get-result'></pre>
+  </div>
+
   @else Guest User | <a href='/auth/register'></a>
   @endif
 </div>
