@@ -112,7 +112,7 @@ class VoteController extends Controller
         }
 
         $requestedVotes = $request->votes;
-
+        $updatedVotes = [];
 
         DB::beginTransaction();
         try {
@@ -140,6 +140,7 @@ class VoteController extends Controller
 
                 }
                 $targetVote->save();
+                $updatedVotes[] = $targetVote;
             }
 
             DB::commit();
@@ -157,7 +158,7 @@ class VoteController extends Controller
 
         return response()->json( [
             'result' => 'success',
-            'data'   => $request->votes
+            'data'   => $targetVote
         ] );
     }
 
