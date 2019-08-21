@@ -113,8 +113,41 @@ class VoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $user = Auth::User();
+        // reject empty Request
+        if(!isset($request->ids)){
+            return response()->json( [
+                'result' => 'error',
+                'message' => 'HTTP_STATUS_CODE_BAD_REQUEST',
+            ], config( 'constants.HTTP_STATUS_CODE_BAD_REQUEST' ) );
+        }
+
+        $ids = $request->ids;
+        $query = Vote::whereIn('votes.id', $ids);
+        $deleteTargetIds = $query->pluck('id');
+
+        DB::beginTransaction();
+        try {
+
+            $query->delete();
+            DB::commit();
+
+        } catch ( \Exception $e ) {
+
+            DB::rollBack();
+            return response()->json( [
+                    'result' => 'error',
+                    'message' => 'HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR',
+                ], config( 'constants.HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR' )
+            );
+
+        }
+
+        return response()->json( [
+            'result' => 'success',
+            'data'   => $deleteTargetIds
+        ] );
     }
 }
