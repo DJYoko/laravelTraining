@@ -1,3 +1,5 @@
-<footer>
-    <div class="text-center">this area is footer<div>
+<footer class="footer bg-light">
+  <div class="container">
+    <p>this area is footer.</p>
+  </div>
 </footer>
