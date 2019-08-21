@@ -26,19 +26,12 @@ $(function() {
 
   createForm.find(".btn").on("click", function() {
     const votes = [];
-
     votes.push({
-      name: "sample1 name",
-      description: "sample1 description"
+      name: createForm.find('input[name="voteName"]').val(),
+      description: createForm.find('input[name="voteDescription"]').val(),
+      startAt: createForm.find('input[name="voteStartAt"]').val(),
+      endAt: createForm.find('input[name="voteEndAt"]').val()
     });
-
-    votes.push({
-      name: "sample2 name",
-      description: "sample2 description",
-      start_at: "2019-08-20 12:00:00",
-      end_at: "2019-09-20 12:00:00"
-    });
-
     createVotes(votes);
   });
 

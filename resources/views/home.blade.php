@@ -1,40 +1,76 @@
-@extends('_layout.base')
-@section('css')
-@endsection
-@section('content')
-<div class='container'>
+@extends('_layout.base') @section('css') @endsection @section('content')
+<div class="container">
   <h1>Home</h1>
   @if(Auth::check()) Hello {{ \Auth::user()->name}}
 
-  <div class='bg-light p-3 mb-3'>
-    <form id='vote-create-form'>
-        <button class='btn btn-primary' type='button'>
-        Create
+  <div class="bg-light p-3 mb-3">
+    <form id="vote-create-form">
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-2 col-form-label">name</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text" name="voteName" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-2 col-form-label"
+          >Description</label
+        >
+        <div class="col-sm-10">
+          <input class="form-control" type="text" name="voteDescription" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-2 col-form-label">StartAt</label>
+        <div class="col-sm-4">
+          <input class="form-control" type="date" name="voteStartAt" />
+        </div>
+        <label for="staticEmail" class="col-sm-2 col-form-label">EndAt</label>
+        <div class="col-sm-4">
+          <input class="form-control" type="date" name="voteEndAt" />
+        </div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary" type="button">
+          Create
         </button>
+      </div>
     </form>
   </div>
 
-  <div class='bg-light p-3 mb-3'>
-    <form id='vote-delete-form'>
-        <input class='form-control' type='text' id='delete-target-ids'>
-        <button class='btn btn-primary' type='button'>
-        delete
-        </button>
+  <div class="bg-light p-3 mb-3">
+    <form id="vote-delete-form">
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-3 col-form-label"
+          >delete target ids</label
+        >
+        <div class="col-sm-7">
+          <input
+            class="form-control"
+            type="text"
+            id="delete-target-ids"
+            placeholder="ex:) 1,2"
+          />
+        </div>
+        <div class="col-sm-2">
+          <button class="btn btn-danger" type="button">
+            delete
+          </button>
+        </div>
+      </div>
     </form>
   </div>
 
-  <div class='bg-light p-3 mb-3'>
-    <button class='btn btn-primary' type='button' id='get-data-button'>
-            Get
+  <div class="text-center">
+    <button class="btn btn-primary mb-3" type="button" id="get-data-button">
+      Get
     </button>
-    <pre id='get-result'></pre>
-  </div>
+    </div>
+    <pre id="get-result" class="bg-light p-3"></pre>
 
-  @else Guest User | <a href='/auth/register'></a>
+  @else Guest User | <a href="/auth/register"></a>
   @endif
 </div>
-@endsection
-@section('js')
+@endsection @section('js')
 
 <script src="{{ asset('/js/vote.js') }}"></script>
 

@@ -42,6 +42,7 @@ class VoteController extends Controller
                 );
         });
 
+        $query->orderBy('votes.updated_at', 'desc');
         $votes = $query->get();
         return response()->json( [ 'result' => 'success', 'votes' => $votes ] );
     }
