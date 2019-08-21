@@ -1,4 +1,14 @@
 @extends('_layout.base')
+@section('css')
+<style>
+#vote-create-form {
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color:#eaeaea;
+}
+</style>
+@endsection
+
 @section('content')
 <div class="container">
     <h1>Home</h1>

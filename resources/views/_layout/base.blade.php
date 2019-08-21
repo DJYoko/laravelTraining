@@ -1,6 +1,8 @@
 <html>
 <head>
 @include('_layout.head')</head>
+@yield('css')
+
 <body>
 @include('_layout.header')</head>
 @yield('content')
