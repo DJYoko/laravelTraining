@@ -14,7 +14,12 @@
     <h1>Home</h1>
     @if(Auth::check())
         Hello {{ \Auth::user()->name}}
-        @include('votes.createForm')
+        <form id="vote-create-form">
+            @csrf
+            <button class="btn btn-primary" type="button">
+                Create
+            </button>
+        </form>
     @else
         Guest User | <a href="/auth/register"></a>
     @endif
@@ -22,8 +27,17 @@
 </div>
 @endsection
 @section('js')
+
 <script>
-$(function(){
-    console.log('a');
-});</script>
+    $(function(){
+
+        const createForm = $('#vote-create-form');
+        const csrf = createForm.find('input[name="_token"]').val();
+
+
+    });
+
+
+</script>
+
 @endsection
