@@ -1,9 +1,12 @@
-<html>
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-</head>
-<body>
+@extends('_layout.base')
+@section('css')
+<style>
+.red{
+    color:"f66"
+}</style>
+<title>Register</title>
+@endsection
+@section('content')
 <div class="container">
     <h1>Register</h1>
     <form action="/auth/register" method="post">
@@ -37,10 +40,4 @@
         <button type="submit" value="send" class="btn btn-primary">Register</button>
     </div>
 </div>
-</form>
-<style>
-.red{
-    color:"f66"
-}</style>
-</body>
-</html>
+@endsection

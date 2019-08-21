@@ -1,8 +1,9 @@
-<html>
+<html lang="{{ app()->getLocale() }}">
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 @include('_layout.head')</head>
 @yield('css')
-
 <body>
 @include('_layout.header')</head>
 @yield('content')
