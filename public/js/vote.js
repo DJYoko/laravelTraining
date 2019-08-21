@@ -13,13 +13,29 @@ $(function() {
       dataType: "json",
       success: function(response) {
         const res = JSON.stringify(response.votes, null, 2);
-        console.log(res);
         $("#get-result").html(res);
+        addUpdateTargets(response.votes);
       },
       error: function(response) {
         console.log(response);
       }
     });
+  };
+
+  // init
+  getVotes();
+
+  const addUpdateTargets = function(votes) {
+    let options = "";
+    votes.forEach(vote => {
+      options = options + '<option value="' + vote.id + '">';
+      options = options + vote.id + " : " + vote.name;
+      options = options + "</option>";
+    });
+    $("#vote-update-form")
+      .find('select[name="voteId"]')
+      .prop("disabled", false)
+      .html(options);
   };
 
   const createForm = $("#vote-create-form");

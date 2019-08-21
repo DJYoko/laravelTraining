@@ -4,27 +4,26 @@
   @if(Auth::check()) Hello {{ \Auth::user()->name}}
 
   <div class="bg-light p-3 mb-3">
+    <h2>create</h2>
     <form id="vote-create-form">
       <div class="form-group row">
-        <label for="staticEmail" class="col-sm-2 col-form-label">name</label>
+        <label class="col-sm-2 col-form-label">name</label>
         <div class="col-sm-10">
           <input class="form-control" type="text" name="voteName" />
         </div>
       </div>
       <div class="form-group row">
-        <label for="staticEmail" class="col-sm-2 col-form-label"
-          >Description</label
-        >
+        <label class="col-sm-2 col-form-label">Description</label>
         <div class="col-sm-10">
           <input class="form-control" type="text" name="voteDescription" />
         </div>
       </div>
       <div class="form-group row">
-        <label for="staticEmail" class="col-sm-2 col-form-label">StartAt</label>
+        <label class="col-sm-2 col-form-label">StartAt</label>
         <div class="col-sm-4">
           <input class="form-control" type="date" name="voteStartAt" />
         </div>
-        <label for="staticEmail" class="col-sm-2 col-form-label">EndAt</label>
+        <label class="col-sm-2 col-form-label">EndAt</label>
         <div class="col-sm-4">
           <input class="form-control" type="date" name="voteEndAt" />
         </div>
@@ -38,11 +37,10 @@
   </div>
 
   <div class="bg-light p-3 mb-3">
+    <h2>delete</h2>
     <form id="vote-delete-form">
       <div class="form-group row">
-        <label for="staticEmail" class="col-sm-3 col-form-label"
-          >delete target ids</label
-        >
+        <label class="col-sm-3 col-form-label">target vote ids</label>
         <div class="col-sm-7">
           <input
             class="form-control"
@@ -60,12 +58,51 @@
     </form>
   </div>
 
+  <div class="bg-light p-3 mb-3">
+    <h2>update</h2>
+    <form id="vote-update-form">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">target vote id</label>
+        <div class="col-sm-9">
+          <select class="form-control" name="voteId" disabled></select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">name</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text" name="voteName" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text" name="voteDescription" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">StartAt</label>
+        <div class="col-sm-4">
+          <input class="form-control" type="date" name="voteStartAt" />
+        </div>
+        <label class="col-sm-2 col-form-label">EndAt</label>
+        <div class="col-sm-4">
+          <input class="form-control" type="date" name="voteEndAt" />
+        </div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary" type="button">
+          update
+        </button>
+      </div>
+    </form>
+  </div>
+
   <div class="text-center">
     <button class="btn btn-primary mb-3" type="button" id="get-data-button">
       Get
     </button>
-    </div>
-    <pre id="get-result" class="bg-light p-3"></pre>
+  </div>
+  <pre id="get-result" class="bg-light p-3"></pre>
 
   @else Guest User | <a href="/auth/register"></a>
   @endif
