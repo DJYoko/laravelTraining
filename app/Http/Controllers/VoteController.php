@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Vote;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class VoteController extends Controller
 {
@@ -46,15 +47,14 @@ class VoteController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
+     * create multiple Votes
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
     {
         $user = AUth::User();
 
-        // empty Request
+        // reject empty Request
         if(!isset($request->votes)){
             return response()->json( [
                 "result" => "error",
@@ -62,11 +62,36 @@ class VoteController extends Controller
             ], config( 'constants.HTTP_STATUS_CODE_BAD_REQUEST' ) );
         }
 
+        $newVotes = [];
+        DB::beginTransaction();
+        try {
+
+            foreach($request->votes as $vote) {
+                $newVote = new Vote();
+                $newVote->user_id =     $user->id;
+                $newVote->name =        $vote['name'];
+                $newVote->description = $vote['description'];
+                $newVote->start_at =    (isset($vote['start_at'])) ? $vote['start_at'] : null;
+                $newVote->end_at =      (isset($vote['end_at']  )) ? $vote['end_at']   : null;
+                $newVote->save();
+                $newVotes[] = $newVote; // for response
+            }
+            DB::commit();
+
+        } catch ( \Exception $e ) {
+
+            DB::rollBack();
+            return response()->json( [
+                    "result" => "error",
+                    "message" => 'HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR',
+                ], config( 'constants.HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR' )
+            );
+
+        }
+
         return response()->json( [
             "result" => "success",
-            "data"   => [],
-            "request" => $request->votes,
-            "user" => $user
+            "data"   => $newVotes
         ] );
     }
 
