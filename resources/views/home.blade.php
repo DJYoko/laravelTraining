@@ -64,7 +64,9 @@
       };
       requestData.votes[1] = {
         name: "sample2 name",
-        description: "sample2 description"
+        description: "sample2 description",
+        start_at: '2019-08-20 12:00:00',
+        end_at: '2019-09-20 12:00:00'
       };
 
       console.log(requestData);
