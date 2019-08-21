@@ -52,10 +52,21 @@ class VoteController extends Controller
      */
     public function create(Request $request)
     {
+        $user = AUth::User();
+
+        // empty Request
+        if(!isset($request->votes)){
+            return response()->json( [
+                "result" => "error",
+                "message"   => 'HTTP_STATUS_CODE_BAD_REQUEST',
+            ], config( 'constants.HTTP_STATUS_CODE_BAD_REQUEST' ) );
+        }
 
         return response()->json( [
             "result" => "success",
-            "data"   => []
+            "data"   => [],
+            "request" => $request->votes,
+            "user" => $user
         ] );
     }
 
