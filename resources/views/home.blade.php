@@ -14,6 +14,12 @@
     <h1>Home</h1>
     @if(Auth::check())
         Hello {{ \Auth::user()->name}}
+
+
+        <button class="btn btn-primary" type="button" id="get-data-button">
+                Get
+            </button>
+
         <form id="vote-create-form">
             @csrf
             <button class="btn btn-primary" type="button">
@@ -31,8 +37,22 @@
 <script>
     $(function(){
 
+        $('#get-data-button').on('click', function(){
+            $.ajax( {
+                url: '/_api/votes',
+                method: 'get',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data)
+                },
+                error: function(data) {
+                    console.log(data)
+                }
+            });
+        })
+
         const createForm = $('#vote-create-form');
-        const csrf = createForm.find('input[name="_token"]').val();
+        const csrfToken = createForm.find('input[name="_token"]').val();
 
         createForm.find('.btn').on('click', function(){
             createVotes();
@@ -40,28 +60,29 @@
 
         const createVotes = function(){
 
-        const votes = [];
+        const requestData = {
+            _token: csrfToken,
+            votes: []
+        };
 
-        votes[0] = {
+        requestData.votes[0] = {
             name: 'sample1 name',
             description: 'sample1 description'
         };
-        votes[1] = {
+        requestData.votes[1] = {
             name: 'sample2 name',
             description: 'sample2 description'
         };
 
-        console.log(votes);
+        console.log(requestData);
 
         $.ajax( {
-            url: '/api/votes',
+            url: '/_api/votes',
             method: 'post',
-            data: {
-                votes: votes
-            },
             dataType: 'json',
+            data: requestData,
             headers: {
-                'X-CSRF-TOKEN': csrf
+                'X-CSRF-TOKEN': csrfToken
             },
             success: function(data) {
                 console.log(data)

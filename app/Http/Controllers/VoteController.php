@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vote;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class VoteController extends Controller
 {
+
+    //コンストラクタ
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -53,7 +61,7 @@ class VoteController extends Controller
 
         return response()->json( [
             "result" => "success",
-            "data"   => $request->all()
+            "data"   => []
         ] );
     }
 
