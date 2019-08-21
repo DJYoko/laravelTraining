@@ -2,18 +2,11 @@
 
 use Illuminate\Http\Request;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::resource('votes', 'VoteController');
+$voteRoute = 'votes';
+Route::get   ($voteRoute,'VoteController@get');
+Route::post  ($voteRoute,'VoteController@create');
+Route::patch ($voteRoute,'VoteController@update');
+Route::delete($voteRoute,'VoteController@destroy');
 
 Route::middleware(['auth:api'])->group(function () {
     // "App\Http\Controllers\Admin"名前空間下のコントローラ
