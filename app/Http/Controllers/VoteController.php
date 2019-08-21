@@ -100,12 +100,65 @@ class VoteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if(!isset($request->votes)){
+            return response()->json( [
+                'result' => 'error',
+                'message' => 'HTTP_STATUS_CODE_BAD_REQUEST',
+            ], config( 'constants.HTTP_STATUS_CODE_BAD_REQUEST' ) );
+        }
+
+        $requestedVotes = $request->votes;
+
+
+        DB::beginTransaction();
+        try {
+
+            foreach($requestedVotes as $requestedVote) {
+                $targetVote = Vote::where('votes.id', '=', $requestedVote['id'])->first();
+                if( !empty( $targetVote ) ) {
+
+                    // in case of Update,
+                    // null or empty text mean 'become NULL or empty text'
+                    // isset cannot define the parameters "is not send" and "send as Null or empty".
+
+                    if(array_key_exists( 'name', $requestedVote)) {
+                        $targetVote->name =  $requestedVote['name'];
+                    }
+                    if(array_key_exists( 'description', $requestedVote)) {
+                        $targetVote->description =  $requestedVote['description'];
+                    }
+                    if(array_key_exists( 'start_at', $requestedVote)) {
+                        $targetVote->start_at =  $requestedVote['start_at'];
+                    }
+                    if(array_key_exists( 'end_at', $requestedVote)) {
+                        $targetVote->end_at =  $requestedVote['end_at'];
+                    }
+
+                }
+                $targetVote->save();
+            }
+
+            DB::commit();
+
+        } catch ( \Exception $e ) {
+
+            DB::rollBack();
+            return response()->json( [
+                    'result' => 'error',
+                    'message' => 'HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR',
+                ], config( 'constants.HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR' )
+            );
+
+        }
+
+        return response()->json( [
+            'result' => 'success',
+            'data'   => $request->votes
+        ] );
     }
 
     /**
