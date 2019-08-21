@@ -29,6 +29,10 @@
 
 <script>
   $(function() {
+
+    const csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+    // get
     $("#get-data-button").on("click", function() {
       $.ajax({
         url: "/_api/votes",
@@ -46,7 +50,6 @@
     });
 
     const createForm = $("#vote-create-form");
-    const csrfToken = createForm.find('input[name="_token"]').val();
 
     createForm.find(".btn").on("click", function() {
       createVotes();
