@@ -21,11 +21,11 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">StartAt</label>
         <div class="col-sm-4">
-          <input class="form-control" type="date" name="voteStartAt" />
+          <input class="form-control" type="datetime-local" name="voteStartAt" />
         </div>
         <label class="col-sm-2 col-form-label">EndAt</label>
         <div class="col-sm-4">
-          <input class="form-control" type="date" name="voteEndAt" />
+          <input class="form-control" type="datetime-local" name="voteEndAt" />
         </div>
       </div>
       <div class="text-center">
@@ -82,11 +82,11 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">StartAt</label>
         <div class="col-sm-4">
-          <input class="form-control" type="date" name="voteStartAt" />
+          <input class="form-control" type="datetime-local" name="voteStartAt" />
         </div>
         <label class="col-sm-2 col-form-label">EndAt</label>
         <div class="col-sm-4">
-          <input class="form-control" type="date" name="voteEndAt" />
+          <input class="form-control" type="datetime-local" name="voteEndAt" />
         </div>
       </div>
       <div class="text-center">
