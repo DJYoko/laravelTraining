@@ -1,28 +1,26 @@
 @extends('_layout.base')
 @section('css')
-<style>
-  #vote-create-form {
-    border: 1px solid #ccc;
-    padding: 20px;
-    background-color: #eaeaea;
-  }
-</style>
 @endsection
 @section('content')
 <div class="container">
   <h1>Home</h1>
   @if(Auth::check()) Hello {{ \Auth::user()->name}}
 
-  <button class="btn btn-primary" type="button" id="get-data-button">
-    Get
-  </button>
+  <div class="bg-light p-3 mb-3">
+    <form id="vote-create-form">
+        @csrf
+        <button class="btn btn-primary" type="button">
+        Create
+        </button>
+    </form>
+  </div>
 
-  <form id="vote-create-form">
-    @csrf
-    <button class="btn btn-primary" type="button">
-      Create
+  <div class="bg-light p-3 mb-3">
+  <button class="btn btn-primary" type="button" id="get-data-button">
+        Get
     </button>
-  </form>
+    <pre id="get-result"></pre>
+</div>
   @else Guest User | <a href="/auth/register"></a>
   @endif
 </div>
@@ -36,11 +34,13 @@
         url: "/_api/votes",
         method: "get",
         dataType: "json",
-        success: function(data) {
-          console.log(data);
+        success: function(response) {
+            const res = JSON.stringify(response.votes, null, 2);
+            console.log(res);
+            $('#get-result').html(res);
         },
-        error: function(data) {
-          console.log(data);
+        error: function(response) {
+          console.log(response);
         }
       });
     });
