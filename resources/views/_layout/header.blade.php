@@ -31,8 +31,8 @@
 <script>
 $(function(){
     $('#set-lang').on('change', function(){
-        const self = $(this);
-        const selectedLanguage = self.val();
+        const selectedLanguage = $(this).val();
+        location.href = "/lang/" + selectedLanguage;
     });
 });
 </script>

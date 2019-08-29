@@ -19,6 +19,11 @@ Route::get('home', function () {
     return view('home');
 });
 
+Route::get('lang/{locale}',function($locale){
+    App::setLocale($locale);
+    return redirect()->back();
+});
+
 Route::get('auth/register','Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('auth/register','Auth\RegisterController@register');
 
