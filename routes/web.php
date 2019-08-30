@@ -19,8 +19,10 @@ Route::get('home', function () {
     return view('home');
 });
 
-Route::get('lang/{locale}',function($locale){
-    App::setLocale($locale);
+Route::get('lang/{lang}',function($lang){
+    // TODO setCookie($lang)
+    // if en or ja is requested => set it
+    // else or null => set fallback lang (from App config)
     return redirect()->back();
 });
 
