@@ -19,12 +19,7 @@ Route::get('home', function () {
     return view('home');
 });
 
-Route::get('lang/{lang}',function($lang){
-    // TODO setCookie($lang)
-    // if en or ja is requested => set it
-    // else or null => set fallback lang (from App config)
-    return redirect()->back();
-});
+Route::get('lang/{lang}','LanguageController@setLanguage')->name('setLanguage');
 
 Route::get('auth/register','Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('auth/register','Auth\RegisterController@register');
