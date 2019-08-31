@@ -13,6 +13,7 @@ a sample application for Vote.
 - API for ajax
 - Auth
 - Model
+- Locale (use Cookie, custom middleware)
 
 ## Version & Environment
 - Laravel: 5.8.18
