@@ -19,6 +19,8 @@ Route::get('home', function () {
     return view('home');
 });
 
+Route::get('lang/{lang}','LanguageController@setLanguage')->name('setLanguage');
+
 Route::get('auth/register','Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('auth/register','Auth\RegisterController@register');
 
