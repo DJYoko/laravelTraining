@@ -11,6 +11,7 @@
       @endif
       <li class="nav-item">
         <select id="set-lang">
+        <option value="default">Lang/言語</option>
         <option value="en">English</option>
         <option value="ja">日本語</option>
         </select>
@@ -32,6 +33,9 @@
 $(function(){
     $('#set-lang').on('change', function(){
         const selectedLanguage = $(this).val();
+        if( selectedLanguage === 'default') {
+            return false;
+        }
         location.href = "/lang/" + selectedLanguage;
     });
 });
