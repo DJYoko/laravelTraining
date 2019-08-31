@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use App;
 use Closure;
 
 class Language
@@ -15,11 +15,13 @@ class Language
      */
     public function handle($request, Closure $next)
     {
-        $val = $request->cookie('lang');
-        // TODO get lang from Cooki
-        // if en or ja is set => setLocale (it)
-        // else or null => setLocale(fallback lang)  (from App config)
-        dd($val);
+        $fallBackLanguage = config('app.fallback_locale');
+        $availableLanguages = config('app.available_locales');
+        $requestedLang = $request->cookie('lang');
+
+        $setLang = (!is_null($requestedLang) && in_array($requestedLang, $availableLanguages)) ? $requestedLang :  $fallBackLanguage;
+        App::setLocale($setLang);
+
         return $next($request);
     }
 }
