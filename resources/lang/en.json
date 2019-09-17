@@ -4,5 +4,7 @@
   "Login": "Login",
   "Logout": "Logout",
   "Password": "Password",
-  "Register": "Register"
+  "PasswordConfirmation": "Password Confirmation",
+  "Register": "Register",
+  "UserName": "User Name"
 }

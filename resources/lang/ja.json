@@ -4,5 +4,7 @@
   "Login": "ログイン",
   "Logout": "ログアウト",
   "Password": "パスワード",
-  "Register": "新規登録"
+  "PasswordConfirmation": "パスワード（確認）",
+  "Register": "新規登録",
+  "UserName": "氏名"
 }
