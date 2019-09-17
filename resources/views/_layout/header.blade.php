@@ -5,7 +5,7 @@
       <li class="nav-item">{{ \Auth::user()->name}}</li>
       <li class="nav-item"><a href="{{ route('logout') }}">{{ __('Logout') }}</a></li>
       @else
-      <li class="nav-item">Guest User</li>
+      <li class="nav-item">{{__('GuestUser')}}</li>
       <li class="nav-item"><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
       <li class="nav-item"><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
       @endif

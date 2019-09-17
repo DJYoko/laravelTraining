@@ -1,5 +1,8 @@
 {
+  "Email": "Eメール",
+  "GuestUser": "ゲストユーザー",
   "Login": "ログイン",
   "Logout": "ログアウト",
+  "Password": "パスワード",
   "Register": "新規登録"
 }
