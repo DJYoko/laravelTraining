@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { Builder, By } = require("selenium-webdriver");
 const assert = require("assert");
 
@@ -18,10 +20,8 @@ describe("Login Form Test", () => {
 
   it("empty login", async () => {
     // goto Login page
-    await driver.get(
-      "http://localhost:3500/auth/login"
-    );
-
+    const loginPageUrl = process.env.WEB_ROOT + '/auth/login'
+    await driver.get(loginPageUrl);
   });
 
 });
