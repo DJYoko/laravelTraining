@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const webdriver = require('selenium-webdriver');
 const { Builder, By } = require('selenium-webdriver');
 const assert = require('assert');
 
