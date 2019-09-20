@@ -29,6 +29,12 @@ describe('Login Form Test', () => {
     const sendButton = driver.findElement(By.className('btn'));
     sendButton.click();
 
+    await driver.wait(webdriver.until.elementLocated(By.className('alert')), 10000).then(()=>{
+      driver.findElement(By.className('alert')).getText().then(function(text) {
+          console.log(text);
+      });
+
+    });
   });
 
 });
