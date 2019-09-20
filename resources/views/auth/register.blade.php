@@ -15,25 +15,33 @@
         <div class="list-group-item">
             {{__('UserName')}}
             <input type="text" name="name" size="30">
-            <span class="red">{{ $errors->first('name')}}</span>
+            @if(!empty($errors->first('name')))
+            <p class="alert alert-danger">{{ $errors->first('name')}}</p>
+            @endif
         </div>
 
         <div class="list-group-item">
             {{__('Email')}}
             <input type="text" name="email" size="30">
-            <span class="red">{{ $errors->first('email')}}</span>
+            @if(!empty($errors->first('email')))
+            <p class="alert alert-danger">{{ $errors->first('email')}}</p>
+            @endif
         </div>
 
         <div class="list-group-item">
             {{__('Password')}}
             <input type="text" name="password" size="30">
-            <span class="red">{{ $errors->first('password')}}</span>
+            @if(!empty($errors->first('password')))
+            <p class="alert alert-danger">{{ $errors->first('password')}}</p>
+            @endif
         </div>
 
         <div class="list-group-item">
             {{__('PasswordConfirmation')}}
             <input type="text" name="password_confirmation" size="30">
-            <span class="red">{{ $errors->first('password_confirmation')}}</span>
+            @if(!empty($errors->first('password_confirmation')))
+            <p class="alert alert-danger">{{ $errors->first('password_confirmation')}}</p>
+            @endif
         </div>
     </div>
     <div class="text-center">

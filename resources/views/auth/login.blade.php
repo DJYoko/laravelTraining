@@ -9,11 +9,13 @@
 @section('content')
 <div class="container">
     <h1>{{__('Login')}}</h1>
-    @isset($message)
-        <p class="red">
-            {{$message}}
-        </p>
-    @endisset
+    @if($errors->any())
+   <div class="alert alert-danger">
+       @foreach ($errors->all() as $error)
+           <p>{{ $error }}</p>
+       @endforeach
+    </div>
+    @endif
     <form action="/auth/login" method="post">
         {{csrf_field()}}
         <div class="list-group mb-2">
