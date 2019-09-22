@@ -15,3 +15,4 @@ composer.phar
 
 ### PHP Coding Standards Fixer ###
 .php_cs.cache
+chromedriver.exe
