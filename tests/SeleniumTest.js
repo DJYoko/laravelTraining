@@ -18,24 +18,20 @@ describe('Login Form Test', () => {
     return driver.quit();
   });
 
-  it('show login page', async () => {
+  it('submit without ID/Password', async () => {
     // goto Login page
     const loginPageUrl = process.env.WEB_ROOT + '/auth/login'
     await driver.get(loginPageUrl);
-  });
 
-  it('login submit without input ID/Password', async () => {
-    // submit without ID/Password
-    const sendButton = driver.findElement(By.className('btn'));
-    sendButton.click();
+    // submit
+    await driver.findElement(By.className('btn')).click();
+    await driver.wait(webdriver.until.elementLocated(By.className('alert')), 10000);
 
-    await driver.wait(webdriver.until.elementLocated(By.className('alert')), 10000).then(()=>{
-      driver.findElement(By.className('alert')).getText().then(function(text) {
-          const correctAlertText ='The email field is required.\nThe password field is required.'
-          assert.equal(correctAlertText, text);
-      });
+    // evaluate result
+    const alertText = await driver.findElement(By.className('alert')).getText();
+    const correctAlertText ='The email field is required.\nThe password field is required.'
+    assert.equal(correctAlertText, alertText);
 
-    });
   });
 
 });
