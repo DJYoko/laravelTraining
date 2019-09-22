@@ -14,6 +14,7 @@ a sample application for Vote.
 - Auth
 - Model
 - Locale (use Cookie, custom middleware)
+- Selenium (testing, describe by mochajs)
 
 ## Version & Environment
 - Laravel: 5.8.18
@@ -21,6 +22,7 @@ a sample application for Vote.
 - MySQL: 8.0.15
 - nginx
 - Editor: Visual Studio Codes
+- Java: 11.0.4
 
 ## DB
 - (Laravel Standard) migrations
