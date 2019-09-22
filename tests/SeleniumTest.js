@@ -31,7 +31,8 @@ describe('Login Form Test', () => {
 
     await driver.wait(webdriver.until.elementLocated(By.className('alert')), 10000).then(()=>{
       driver.findElement(By.className('alert')).getText().then(function(text) {
-          console.log(text);
+          const correctAlertText ='The email field is required.\nThe password field is required.'
+          assert.equal(correctAlertText, text);
       });
 
     });
