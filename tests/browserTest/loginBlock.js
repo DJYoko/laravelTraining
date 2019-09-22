@@ -5,9 +5,7 @@ const assert = require('assert');
 
 let driver;
 
-console.log('\n\n this Test needs [ chromedriver.exe ] on root directory \n\n');
-
-describe('Login Form Test', () => {
+describe('Login Block Test', () => {
   before(() => {
     driver = new Builder().forBrowser('chrome').build();
     process.on('unhandledRejection', console.dir);
@@ -36,26 +34,4 @@ describe('Login Form Test', () => {
     assert.equal(correctAlertText, alertText);
   });
 
-  it('submit with correct ID/Password', async () => {
-    // goto Login page
-    const loginPageUrl = process.env.WEB_ROOT + '/auth/login';
-    await driver.get(loginPageUrl);
-
-    // input params
-    driver
-      .findElement(By.name('email'))
-      .sendKeys(process.env.WEB_LOGIN_TEST_ACCOUNT_EMAIL);
-    driver
-      .findElement(By.name('password'))
-      .sendKeys(process.env.WEB_LOGIN_TEST_ACCOUNT_PASSWORD);
-
-    // submit
-    await driver.findElement(By.className('btn')).click();
-    await driver.wait(webdriver.until.elementLocated(By.tagName('h1')), 10000);
-
-    // evaluate result
-    const alertText = await driver.findElement(By.tagName('h1')).getText();
-    const correctH1Text = 'Home';
-    assert.equal(correctH1Text, alertText);
-  });
 });

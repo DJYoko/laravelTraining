@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "browserTest": "mocha ./tests/SeleniumTest.js --timeout 30000",
+    "browserTest": "mocha ./tests/browserTest --recursive --timeout 30000",
     "storybook": "start-storybook",
     "dev": "npm run development",
     "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
