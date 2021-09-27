@@ -23,13 +23,14 @@ class VoteController extends Controller
         //TODO
         // add keyword filter
         // add user filter
+        $currentDatetime = Carbon::now();
 
-        $query->where(function($query){
+        $query->where(function($query) use ($currentDatetime) {
             $query
                 ->where(
                     // pattern 1: start & end is defined, and TODAY is between them.
-                    function($query){
-                        $currentDatetime = Carbon::now();
+                    function($query) use ($currentDatetime) {
+
                         $query->where( 'votes.start_at', '<=', $currentDatetime );
                         $query->where( 'votes.end_at',   '>=', $currentDatetime );
                     }
