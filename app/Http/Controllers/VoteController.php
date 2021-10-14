@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\DB;
 class VoteController extends Controller
 {
 
+    public function home(){
+        return view('page.vote.index');
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -28,7 +28,6 @@ Route::get('auth/logout','Auth\LoginController@logout')->name('logout');
 Route::middleware('auth')->group(function () {
 
     Route::get('/home', 'IndexController@home')->name('indexHome');
-
-
+    Route::get('/vote', 'VoteController@home')->name('voteIndex');
 
 });
