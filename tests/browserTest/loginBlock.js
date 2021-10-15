@@ -17,7 +17,7 @@ describe('Login Block Test', () => {
 
   it('submit without ID/Password', async () => {
     // goto Login page
-    const loginPageUrl = process.env.WEB_ROOT + '/auth/login';
+    const loginPageUrl = process.env.APP_URL + '/auth/login';
     await driver.get(loginPageUrl);
 
     // submit
