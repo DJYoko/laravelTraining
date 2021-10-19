@@ -5,9 +5,11 @@
 @section('content')
 <div class="container">
 <h1>プロフィール編集</h1>
-    <div>
-        <input name="userName" value="">
-    </div>
+    <form action="{{route('profile.edit')}}" method="POST">
+        @csrf
+        名前<input name="userName" value="{{ \Auth::user()->name}}">
+        <button type="submit">送信</button>
+    </form>
 </div>
 @endsection
 

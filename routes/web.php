@@ -31,8 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/vote', 'VoteController@home')->name('voteIndex');
 
     Route::prefix('profile')->group(function () {
-        Route::get('/','ProfileController@home')->name('profile.homeGet');
-        Route::post('/','ProfileController@home')->name('profile.homePost');
+        Route::get('/','ProfileController@detail')->name('profile.detail');
+        Route::post('/','ProfileController@edit')->name('profile.edit');
     });
 
 });
