@@ -6,6 +6,11 @@
 <div class="container">
 <h1>サークル登録</h1>
 
+<div class="alert alert-danger">
+    @foreach($messages as $message)
+    <div>{{ $message}}</div>
+    @endforeach
+</div>
 <form action="{{route('circle.create.save')}}" method="POST">
     @csrf
     <div>サークル名<input name="circleName" value=""></div>
