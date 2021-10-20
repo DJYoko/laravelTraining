@@ -18,6 +18,8 @@ class CreateCirclesTable extends Migration
             $table->string('name', 32);
             $table->string('path', 255);
             $table->string('thumbnail_path', 255);
+            $table->integer('create_user_id')->unsigned();
+            $table->foreign('create_user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
