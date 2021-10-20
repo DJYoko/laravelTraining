@@ -14,8 +14,13 @@ class CircleController extends Controller
         return view('page.circle.index');
     }
 
-    public function create(Request $request)
+    public function createInput(Request $request)
     {
-        return view('page.circle.create');
+        return view('page.circle.create.index');
+    }
+
+    public function createComplete(Request $request)
+    {
+        return view('page.circle.create.complete');
     }
 }
