@@ -19,8 +19,33 @@ class CircleController extends Controller
         return view('page.circle.create.index');
     }
 
-    public function createComplete(Request $request)
+    public function createSave(Request $request)
     {
-        return view('page.circle.create.complete');
+        $user = Auth::user();
+        $userId = $user->id;
+
+        $circleName = $request->input('circleName');
+        $circlePath = $request->input('circlePath');
+
+        $messages = [];
+        if (!isset($circleName)) {
+            $messages['circleName'] = '名前を入力してください';
+        }
+        if (!isset($circlePath)) {
+            $messages['circlePath'] = 'URLを入力してください';
+        }
+
+        // ほかにバリデーション項目があればここに加筆
+
+        // バリデーション停職時、エラーメッセージをつけて入力画面を再表示
+        if (!empty($messages)) {
+            return view('page.circle.create.index', [
+                'messages' => $messages
+            ]);
+        }
+
+        // TODO 登録処理
+
+        return view('page.circle.create.save');
     }
 }

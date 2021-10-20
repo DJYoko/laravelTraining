@@ -6,7 +6,7 @@
 <div class="container">
 <h1>サークル登録</h1>
 
-<form action="{{route('circle.create.complete')}}" method="POST">
+<form action="{{route('circle.create.save')}}" method="POST">
     @csrf
     <div>サークル名<input name="circleName" value=""></div>
     <div>URL<input name="circlePath" value=""></div>

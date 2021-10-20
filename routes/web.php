@@ -36,6 +36,6 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('circle')->group(function () {
         Route::get('/create', 'CircleController@createInput')->name('circle.create.input');
-        Route::post('/create', 'CircleController@createComplete')->name('circle.create.complete');
+        Route::post('/create', 'CircleController@createSave')->name('circle.create.save');
     });
 });
