@@ -46,6 +46,6 @@ class CircleController extends Controller
 
         // TODO 登録処理
 
-        return view('page.circle.create.save');
+        return view('page.circle.create.complete');
     }
 }
