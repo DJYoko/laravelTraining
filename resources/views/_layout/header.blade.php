@@ -2,6 +2,7 @@
   <div class="container">
     <ul class="nav">
       @if(Auth::check())
+      <li class="nav-item"><a href="{{ route('indexHome') }}">ホーム</a></li>
       <li class="nav-item">{{ \Auth::user()->name}}</li>
       <li class="nav-item"><a href="{{ route('logout') }}">{{ __('Logout') }}</a></li>
       @else
