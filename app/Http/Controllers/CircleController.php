@@ -27,6 +27,7 @@ class CircleController extends Controller
 
         $circleName = $request->input('circleName');
         $circlePath = $request->input('circlePath');
+        $circleDescription = !empty($request->input('circleDescription')) ? $request->input('circleDescription') : '';
 
         $messages = [];
         if (!isset($circleName)) {
@@ -38,7 +39,6 @@ class CircleController extends Controller
 
         // ほかにバリデーション項目があればここに加筆
 
-
         DB::beginTransaction();
         try {
             // TODO 登録処理
@@ -47,7 +47,11 @@ class CircleController extends Controller
             $newCircle->path = $circlePath;
             $newCircle->create_user_id = $userId;
             $newCircle->thumbnail_path = ''; //TODO あとでやる
+            $newCircle->description = $circleDescription;
             $newCircle->save();
+
+            // TODO circle member を作る
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();

@@ -16,6 +16,7 @@
 <form action="{{route('circle.create.save')}}" method="POST">
     @csrf
     <div>サークル名<input name="circleName" value=""></div>
+    <div>説明<input name="circleDescription" value=""></div>
     <div>URL<input name="circlePath" value=""></div>
     <button type="submit">送信</button>
 </form>
