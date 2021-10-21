@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int id
  * @property int user_id
  * @property int circle_id
+ * @property int role
  * @property Carbon created_at
  * @property Carbon updated_at
  */
@@ -32,7 +33,8 @@ class CircleMember extends Model
 
     protected $casts = [
         'circle_id'=> 'int',
-        'user_id'=> 'int'
+        'user_id'=> 'int',
+        'role'=> 'int',
     ];
 
     /**
