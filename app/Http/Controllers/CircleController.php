@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Circle;
+use App\Models\CircleMember;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,12 +52,20 @@ class CircleController extends Controller
             $newCircle->description = $circleDescription;
             $newCircle->save();
 
-            // TODO circle member を作る
+            // 新設したサークルに、作成ユーザーをメンバーとして登録
+            $newCircleId = $newCircle->id;
+            $newCircleMember = new CircleMember();
+            $newCircleMember->user_id = $userId;
+            $newCircleMember->circle_id = $newCircleId;
+            $newCircleMember->role = 0;
+
+            // TODO role 割り当て
+            $newCircleMember->save();
 
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            $messages['SQL'] = 'データベースエラー';
+            $messages['SQL'] = $e;
         }
 
         // バリデーション停職時、エラーメッセージをつけて入力画面を再表示
