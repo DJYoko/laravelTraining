@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Circle;
 use App\Models\CircleMember;
+use App\Enum\CircleMemberRole;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,7 +58,7 @@ class CircleController extends Controller
             $newCircleMember = new CircleMember();
             $newCircleMember->user_id = $userId;
             $newCircleMember->circle_id = $newCircleId;
-            $newCircleMember->role = 0;
+            $newCircleMember->role = CircleMemberRole::OWNER();
 
             // TODO role 割り当て
             $newCircleMember->save();

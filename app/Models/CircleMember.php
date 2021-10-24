@@ -34,7 +34,7 @@ class CircleMember extends Model
     protected $casts = [
         'circle_id'=> 'int',
         'user_id'=> 'int',
-        'role'=> 'int',
+        'role'=> 'string', // Enum CircleMemberRole
     ];
 
     /**
