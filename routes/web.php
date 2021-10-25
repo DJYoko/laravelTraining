@@ -22,6 +22,9 @@ Route::get('auth/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('auth/login', 'Auth\LoginController@login');
 Route::get('auth/logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::prefix('circle')->group(function () {
+    Route::get('/', 'CircleController@index')->name('circle.index');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', 'IndexController@home')->name('indexHome');
