@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'IndexController@topIndex')->name('topIndex');
 
 Route::get('lang/{lang}', 'LanguageController@setLanguage')->name('setLanguage');
 
