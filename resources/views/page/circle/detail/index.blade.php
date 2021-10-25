@@ -9,9 +9,16 @@
 <h1>{{$circle->name}}</h1>
 <p>{{$circle->description}}</p>
 <p>{{$circle->thumbnail_path}}</p>
-@else
-<p>該当のサークルはありません</p>
 @endif
+<h2>メンバー</h2>
+<ul>
+    @foreach ($members as $member)
+        <li>
+            <p>name: {{$member->name}}</p>
+            {{-- <p>link: <a href="{{route('member.detail', ['memberPath' => $member->path])}}">{{route('member.detail', ['circlePath' => $circle->path])}}</a></p> --}}
+        </li>
+    @endforeach
+    </ul>
 
 </div>
 @endsection

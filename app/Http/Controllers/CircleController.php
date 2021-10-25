@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Circle;
 use App\Models\CircleMember;
+use App\Models\User;
 use App\Enum\CircleMemberRole;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -31,6 +32,13 @@ class CircleController extends Controller
             return  response()->view('page.error.404', $params, 404);
         }
         $params['circle'] = $theCircle;
+
+        // メンバー取得
+        $theCircleMembers = User::Join('circle_members', 'circle_members.user_id', '=', 'users.id')
+            ->select('*')
+            ->where('circle_members.circle_id', '=', $theCircle->id)
+            ->get();
+        $params['members'] = $theCircleMembers;
 
         return view('page.circle.detail.index', $params);
     }
