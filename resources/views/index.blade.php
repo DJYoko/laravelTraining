@@ -9,6 +9,7 @@
 @foreach ($circles as $circle)
     <li>
         <p>name: {{$circle->name}}</p>
+        <p>link: <a href="{{route('circle.detail', ['circlePath' => $circle->path])}}">{{route('circle.detail', ['circlePath' => $circle->path])}}</a></p>
     </li>
 @endforeach
 </ul>
