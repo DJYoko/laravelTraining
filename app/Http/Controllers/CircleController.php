@@ -23,9 +23,16 @@ class CircleController extends Controller
         return view('page.circle.create.index');
     }
 
-    public function circleDetail(Request $request)
+    public function circleDetail($circlePath, Request $request)
     {
-        return view('page.circle.detail.index');
+        $params = [];
+        $theCircle = Circle::where('circles.path', '=', $circlePath)->first();
+        if (is_null($theCircle)) {
+            return  response()->view('page.error.404', $params, 404);
+        }
+        $params['circle'] = $theCircle;
+
+        return view('page.circle.detail.index', $params);
     }
 
 
