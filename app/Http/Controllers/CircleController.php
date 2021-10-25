@@ -23,6 +23,12 @@ class CircleController extends Controller
         return view('page.circle.create.index');
     }
 
+    public function circleDetail(Request $request)
+    {
+        return view('page.circle.detail.index');
+    }
+
+
     public function createSave(Request $request)
     {
         $user = Auth::user();

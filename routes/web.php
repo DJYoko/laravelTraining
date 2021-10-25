@@ -24,6 +24,7 @@ Route::get('auth/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::prefix('circle')->group(function () {
     Route::get('/', 'CircleController@index')->name('circle.index');
+    Route::get('/detail/{circlePath}', 'CircleController@circleDetail')->name('circle.detail');
 });
 
 Route::middleware('auth')->group(function () {
