@@ -16,7 +16,10 @@ class CircleController extends Controller
 {
     public function index()
     {
-        return view('page.circle.index');
+        $allCircles = Circle::orderBy('created_at', 'desc')->get();
+        return view('page.circle.index', [
+            'circles' => $allCircles,
+        ]);
     }
 
     public function createInput(Request $request)
