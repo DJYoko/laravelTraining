@@ -12,6 +12,7 @@
     </li>
 @endforeach
 </ul>
+<p><a href="{{ route('circle.index')}}">すべてのサークル</a></p>
 </div>
 @endsection
 
