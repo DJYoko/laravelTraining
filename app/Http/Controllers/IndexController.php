@@ -13,7 +13,10 @@ class IndexController extends Controller
 {
     public function topIndex()
     {
-        return view('welcome');
+        $allCircles = Circle::get();
+        return view('index', [
+            'circles' => $allCircles,
+        ]);
     }
 
     /**
