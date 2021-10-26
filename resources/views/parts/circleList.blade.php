@@ -1,8 +1,8 @@
-<div class="p-circleList row">
+<div class="p-circleList">
     @foreach ($_circles as $circle)
-        <div class="p-circleList__circle col-sm-3">
+        <div class="p-circleList__circle">
             <a href="{{route('circle.detail', ['circlePath' => $circle->path])}}" class="p-circleList__circleLink">
-                <p class="p-circleList__circleName">name: {{$circle->name}}</p>
+                <p class="p-circleList__circleName">{{$circle->name}}</p>
             </a>
         </div>
     @endforeach
