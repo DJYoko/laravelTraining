@@ -13,7 +13,7 @@ class IndexController extends Controller
 {
     public function topIndex()
     {
-        $allCircles = Circle::get();
+        $allCircles = Circle::orderBy('created_at', 'desc')->get();
         return view('index', [
             'circles' => $allCircles,
         ]);
