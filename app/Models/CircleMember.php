@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use App\Enum\CircleMemberRole;
 use Illuminate\Database\Eloquent\Model;
 
 /*
@@ -36,6 +37,27 @@ class CircleMember extends Model
         'user_id'=> 'int',
         'role'=> 'string', // Enum CircleMemberRole
     ];
+
+    public static function isEditable(int $circleId, int $userId)
+    {
+        $matchedMembers = CircleMember::where('circle_members.circle_id', '=', $circleId)
+            ->where('circle_members.user_id', '=', $userId)
+            ->get();
+
+        // 当該サークルメンバー自体が不在の場合は false
+        if ($matchedMembers->isEmpty()) {
+            return false;
+        }
+
+        $theMemberRole = $matchedMembers[0]->role;
+
+        $editableRoleList = [
+            CircleMemberRole::OWNER()
+            // その他にも編集可能なrole種類が増えたらこの配列を増やす
+        ];
+
+        return in_array($theMemberRole, $editableRoleList);
+    }
 
     /**
      * blank field filled as Null
