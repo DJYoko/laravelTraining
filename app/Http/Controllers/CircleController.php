@@ -35,13 +35,25 @@ class CircleController extends Controller
             return  response()->view('page.error.404', $params, 404);
         }
         $params['circle'] = $theCircle;
+        $circleId =  $theCircle->id;
 
         // メンバー取得
         $theCircleMembers = User::Join('circle_members', 'circle_members.user_id', '=', 'users.id')
             ->select('*')
-            ->where('circle_members.circle_id', '=', $theCircle->id)
+            ->where('circle_members.circle_id', '=', $circleId)
             ->get();
         $params['members'] = $theCircleMembers;
+
+        // 自分が編集権限を持っているサークルであるかどうかを確認してビューに渡す
+        $params['isEditable'] = false;
+
+        // ログインしていなければスルー
+        $user = Auth::user();
+        if (!is_null($user)) {
+            $userId = $user->id;
+            //$circleId
+            $params['isEditable'] = CircleMember::isEditable($circleId, $userId);
+        }
 
         return view('page.circle.detail.index', $params);
     }
