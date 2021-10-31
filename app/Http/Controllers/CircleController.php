@@ -105,7 +105,7 @@ class CircleController extends Controller
             $messages['SQL'] = $e;
         }
 
-        // バリデーション停職時、エラーメッセージをつけて入力画面を再表示
+        // バリデーション抵触時、エラーメッセージをつけて入力画面を再表示
         if (!empty($messages)) {
             return view('page.circle.create.index', [
                 'messages' => $messages
@@ -113,5 +113,75 @@ class CircleController extends Controller
         }
 
         return view('page.circle.create.complete');
+    }
+
+    public function updateInput($circlePath, Request $request)
+    {
+        $params = [];
+        $theCircle = Circle::where('circles.path', '=', $circlePath)->first();
+
+        $user = Auth::user();
+        $userId = $user->id;
+
+        $params = [];
+        $params['circle'] = $theCircle;
+
+        return view('page.circle.update.index', $params);
+    }
+
+    public function updateSave($beforeCirclePath, Request $request)
+    {
+        $params = [];
+
+        $circleName = $request->input('circleName');
+        $afterCirclePath = $request->input('circlePath');
+        $circleDescription = !empty($request->input('circleDescription')) ? $request->input('circleDescription') : '';
+
+        $messages = [];
+        if (!isset($circleName)) {
+            $messages['circleName'] = '名前を入力してください';
+        }
+        if (!isset($afterCirclePath)) {
+            $messages['circlePath'] = 'URLを入力してください';
+        }
+        // バリデーション抵触時、エラーメッセージをつけて入力画面を再表示
+        if (!empty($messages)) {
+            $params['messages'] = $messages;
+            $params['circle'] = [];
+            $params['circle']['name'] = $circleName;
+            $params['circle']['path'] = $beforeCirclePath;
+            $params['circle']['description'] = $circleDescription;
+            return view('page.circle.update.index', $params);
+        }
+
+        DB::beginTransaction();
+        try {
+            Circle::where('circles.path', '=', $beforeCirclePath)->update([
+                'name' => $circleName,
+                'path' => $afterCirclePath,
+                'description' => $circleDescription,
+            ]);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $messages['SQL'] = $e;
+        }
+
+        // バリデーション抵触時、エラーメッセージをつけて入力画面を再表示
+        if (!empty($messages)) {
+            $params['messages'] = $messages;
+            $params['circle'] = [];
+            $params['circle']['name'] = $circleName;
+            $params['circle']['path'] = $beforeCirclePath;
+            $params['circle']['description'] = $circleDescription;
+            return view('page.circle.update.index', $params);
+        }
+
+        $params['circle'] = [];
+        $params['circle']['name'] = $circleName;
+        $params['circle']['path'] = $afterCirclePath;
+        $params['circle']['description'] = $circleDescription;
+
+        return view('page.circle.update.complete', $params);
     }
 }
