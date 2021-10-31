@@ -9,7 +9,7 @@
         <p>{{$circle->description}}</p>
         <p>{{$circle->thumbnail_path}}</p>
     @endif
-    @if(isset($isEditable))
+    @if($isEditable)
         <p>内容を編集する</p>
     @endif
     <h2>メンバー</h2>
