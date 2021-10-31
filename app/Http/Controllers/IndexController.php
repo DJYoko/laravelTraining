@@ -29,18 +29,16 @@ class IndexController extends Controller
         $user = Auth::user();
         $userId = $user->id;
 
-        // $myCircles = CircleMember::where('user_id', $user->id)->get();
-        // 自分が属しているサークルを検出する
-        // - role を見てオーナーかどうかでグループまたはソートする
-        // SELECT
-        // circles.*, circle_members.user_id, circle_members.role AS member_user_id
-        // FROM
-        //     circles
-        //         INNER JOIN
-        //     circle_members ON circle_members.circle_id = circles.id
-        // WHERE
-        //     circle_members.user_id = 1;
+        // 自分の参加しているサークル
+        $myCircles = Circle::orderBy('created_at', 'desc')
+            ->join('circle_members', 'circles.id', '=', 'circle_members.circle_id')
+            ->where('circle_members.user_id', $userId)
+            ->select('circles.*')
+            ->get();
 
-        return view('page.home.index');
+        $params = [];
+        $params['myCircles'] = $myCircles;
+
+        return view('page.home.index', $params);
     }
 }
