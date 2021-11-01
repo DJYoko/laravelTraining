@@ -13,20 +13,21 @@
         <p><a href="{{route('circle.update.input', ['circlePath' => $circle->path] )}}">内容を編集する</a></p>
     @endif
     <h2>メンバー</h2>
-    <ul>
+    <div class="p-memberList">
         @foreach ($members as $member)
-            <li>
-                <p>name: {{$member->name}}</p>
+            <div class="p-memberList__member"
                 @if(isset($member->thumbnail_path))
-                <img src="{{config( 'constants.USER_PROFILE_IMAGE_STORAGE_DIRECTORY' )}}{{ $member->thumbnail_path}}" width="200" height="200">
-                @else
-                <img src="/images/blank.png" width="200" height="200">
-
+                style="background-image:url({{config( 'constants.USER_PROFILE_IMAGE_STORAGE_DIRECTORY' )}}{{ $member->thumbnail_path}});"
                 @endif
-                {{-- <p>link: <a href="{{route('member.detail', ['memberPath' => $member->path])}}">{{route('member.detail', ['circlePath' => $circle->path])}}</a></p> --}}
-            </li>
+                >
+                <a class="p-memberList__memberLink">
+                    <div class="p-memberList__memberName">name: {{$member->name}}</div>
+
+                    {{-- <p>link: <a href="{{route('member.detail', ['memberPath' => $member->path])}}">{{route('member.detail', ['circlePath' => $circle->path])}}</a></p> --}}
+                </a>
+            </div>
         @endforeach
-        </ul>
+        </div>
     </div>
 @endsection
 

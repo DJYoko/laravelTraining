@@ -1,0 +1,44 @@
+.p-memberList {
+    &:after {
+        content: '';
+        clear: both;
+        display: block;
+        width: 100%;
+        height: 1px;
+        margin-bottom: -1px;
+    }
+}
+
+.p-memberList__member {
+    width: 20%;
+    position: relative;
+    float: left;
+    padding: 1px;
+    background-image: url(/images/blank.png);
+    background-position: center middle;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.p-memberList__memberLink {
+    width: 100%;
+    padding-top: 100%;
+    display: block;
+    text-decoration: none;
+    position: relative;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.p-memberList__memberName {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    padding: 4px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    margin-bottom: 0;
+}
