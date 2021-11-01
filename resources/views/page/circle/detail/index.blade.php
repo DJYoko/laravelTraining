@@ -17,6 +17,12 @@
         @foreach ($members as $member)
             <li>
                 <p>name: {{$member->name}}</p>
+                @if(isset($member->thumbnail_path))
+                <img src="{{config( 'constants.USER_PROFILE_IMAGE_STORAGE_DIRECTORY' )}}{{ $member->thumbnail_path}}" width="200" height="200">
+                @else
+                <img src="/images/blank.png" width="200" height="200">
+
+                @endif
                 {{-- <p>link: <a href="{{route('member.detail', ['memberPath' => $member->path])}}">{{route('member.detail', ['circlePath' => $circle->path])}}</a></p> --}}
             </li>
         @endforeach
