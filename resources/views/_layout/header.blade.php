@@ -1,13 +1,12 @@
 <header class="bg-light">
 <div class="container">
     <ul class="nav">
-        @if(Auth::check())
         <li class="nav-item"><a href="{{ route('topIndex') }}">トップ</a></li>
+        @if(Auth::check())
         <li class="nav-item"><a href="{{ route('indexHome') }}">マイページ</a></li>
         <li class="nav-item">{{ \Auth::user()->name}}</li>
         <li class="nav-item"><a href="{{ route('logout') }}">{{ __('Logout') }}</a></li>
         @else
-        <li class="nav-item">{{__('GuestUser')}}</li>
         <li class="nav-item"><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
         <li class="nav-item"><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
         @endif
