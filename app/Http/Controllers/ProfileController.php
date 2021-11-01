@@ -23,7 +23,7 @@ class ProfileController extends Controller
         if ($file = $request->profileImage) {
             $imageExtension = $request->file('profileImage')->extension();
             $thumbnailPath = strval($user->id) . '_' .time() . '.' . $imageExtension;
-            $storagePath = public_path('/uploads/userProfile/');
+            $storagePath = public_path(config('constants.USER_PROFILE_IMAGE_STORAGE_DIRECTORY'));
             $file->move($storagePath, $thumbnailPath);
         }
 

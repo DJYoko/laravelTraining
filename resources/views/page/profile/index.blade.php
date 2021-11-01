@@ -19,7 +19,7 @@
             <input type="file" name="profileImage">
             <small id="profileImageHelp" class="form-text text-muted">表示される画像を登録します</small>
             <div>現在登録されている画像</div>
-            <img src="/uploads/userProfile/{{ \Auth::user()->thumbnail_path}}" width="200" height="200">
+            <img src="{{config( 'constants.USER_PROFILE_IMAGE_STORAGE_DIRECTORY' )}}{{ \Auth::user()->thumbnail_path}}" width="200" height="200">
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-primary">送信</button>
