@@ -10,7 +10,7 @@
         <p>{{$circle->thumbnail_path}}</p>
     @endif
     @if($isEditable)
-        <p><a href="{{route('circle.update.input', ['circlePath' => $circle->path] )}}">内容を編集する</a></p>
+        <p><a href="{{route('circle.update.input', ['circlePath' => $circle->path] )}}">サークル情報編集</a></p>
     @endif
     <h2>メンバー</h2>
     <div class="p-memberList">
