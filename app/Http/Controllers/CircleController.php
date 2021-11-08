@@ -76,6 +76,16 @@ class CircleController extends Controller
             $messages['circlePath'] = 'URLを入力してください';
         }
 
+        $thumbnailPath = '';
+
+        if ($request->circleImage) {
+            $file = $request->circleImage;
+            $imageExtension = $request->file('circleImage')->extension();
+            $thumbnailPath = strval($user->id) . '_' .time() . '.' . $imageExtension;
+            $storagePath = public_path(config('constants.CIRCLE_IMAGE_STORAGE_DIRECTORY'));
+            $file->move($storagePath, $thumbnailPath);
+        }
+
         // ほかにバリデーション項目があればここに加筆
 
         DB::beginTransaction();
@@ -85,7 +95,7 @@ class CircleController extends Controller
             $newCircle->name  = $circleName;
             $newCircle->path = $circlePath;
             $newCircle->create_user_id = $userId;
-            $newCircle->thumbnail_path = ''; //TODO あとでやる
+            $newCircle->thumbnail_path = $thumbnailPath;
             $newCircle->description = $circleDescription;
             $newCircle->save();
 

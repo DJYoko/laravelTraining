@@ -13,7 +13,7 @@
     @endforeach
 </div>
 @endif
-<form action="{{route('circle.create.save')}}" method="POST">
+<form action="{{route('circle.create.save')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div>サークル名<input name="circleName" value=""></div>
     <div>説明<input name="circleDescription" value=""></div>
