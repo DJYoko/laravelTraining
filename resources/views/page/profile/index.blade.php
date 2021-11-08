@@ -3,7 +3,7 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container p-profileDetail">
 <h1>プロフィール編集</h1>
     <form action="{{route('profile.edit')}}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -16,10 +16,14 @@
 
         <div class="form-group">
             <label for="profileImage">アイコン画像</label>
-            <input type="file" name="profileImage">
+            <label for="profileImage" class="p-profileDetail-memberThumbnail"
+                @if(isset(Auth::user()->thumbnail_path))
+                style="background-image:url({{config( 'constants.USER_PROFILE_IMAGE_STORAGE_DIRECTORY' )}}{{ Auth::user()->thumbnail_path}});"
+                @endif
+            ></label>
+            <input type="file" id="profileImage" name="profileImage">
             <small id="profileImageHelp" class="form-text text-muted">表示される画像を登録します</small>
-            <div>現在登録されている画像</div>
-            <img src="{{config( 'constants.USER_PROFILE_IMAGE_STORAGE_DIRECTORY' )}}{{ \Auth::user()->thumbnail_path}}" width="200" height="200">
+
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-primary">送信</button>
