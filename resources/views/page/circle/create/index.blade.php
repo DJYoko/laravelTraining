@@ -15,11 +15,31 @@
 @endif
 <form action="{{route('circle.create.save')}}" method="POST" enctype="multipart/form-data">
     @csrf
-    <div>サークル名<input name="circleName" value=""></div>
-    <div>説明<input name="circleDescription" value=""></div>
-    <div>URL<input name="circlePath" value=""></div>
-    <div>アイコン画像<input type="file" name="circleImage" value=""></div>
-    <button type="submit">送信</button>
+    <div class="form-group">
+        <label for="circleName">表示名</label>
+        <input type="text" class="form-control" id="circleName" aria-describedby="circleNameHelp" placeholder="表示名" name="circleName" value="{{ \Auth::user()->name}}">
+        <small id="circleNameHelp" class="form-text text-muted">表示されるサークル名を入力します</small>
+    </div>
+    <div class="form-group">
+        <label for="circleDescription">説明</label>
+        <input type="text" class="form-control" id="circleDescription" aria-describedby="circleDescriptionHelp" placeholder="表示名" name="circleDescription" value="{{ \Auth::user()->name}}">
+        <small id="circleDescriptionHelp" class="form-text text-muted">サークル概要を入力します</small>
+    </div>
+    <div class="form-group">
+        <label for="circlePath">URL</label>
+        <input type="text" class="form-control" id="circlePath" aria-describedby="circlePathHelp" placeholder="表示名" name="circlePath" value="{{ \Auth::user()->name}}">
+        <small id="circlePathHelp" class="form-text text-muted">当サイト内でのURLを入力します<br>例） http://????.com/circle/この部分</small>
+    </div>
+    <div class="form-group">
+        <label for="circleImage">アイコン画像</label>
+        <div>
+            <input type="file" class="" id="circleImage" aria-describedby="circleImageHelp" placeholder="表示名" name="circleImage" value="{{ \Auth::user()->name}}">
+        </div>
+        <small id="circleImageHelp" class="form-text text-muted">アイコン画像を選択します</small>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">送信</button>
+    </div>
 </form>
 </div>
 @endsection
