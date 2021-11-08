@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class ProfileController extends Controller
+class MemberController extends Controller
 {
     public function detail()
     {
-        return view('page.profile.index');
+        return view('page.member.index');
     }
 
     public function edit(Request $request)
@@ -20,10 +20,10 @@ class ProfileController extends Controller
         $newName = $request->input('userName');
         $thumbnailPath = '';
 
-        if ($file = $request->profileImage) {
-            $imageExtension = $request->file('profileImage')->extension();
+        if ($file = $request->memberImage) {
+            $imageExtension = $request->file('memberImage')->extension();
             $thumbnailPath = strval($user->id) . '_' .time() . '.' . $imageExtension;
-            $storagePath = public_path(config('constants.USER_PROFILE_IMAGE_STORAGE_DIRECTORY'));
+            $storagePath = public_path(config('constants.MEMBER_IMAGE_STORAGE_DIRECTORY'));
             $file->move($storagePath, $thumbnailPath);
         }
 
@@ -45,6 +45,6 @@ class ProfileController extends Controller
                 );
             }
         }
-        return view('page.profile.index');
+        return view('page.member.index');
     }
 }

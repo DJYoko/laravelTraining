@@ -7,6 +7,6 @@ return array(
     'HTTP_STATUS_CODE_FORBIDDEN'    => 403,
     'HTTP_STATUS_CODE_NOT_FOUND'    => 404,
     'HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR'    => 500,
-    'USER_PROFILE_IMAGE_STORAGE_DIRECTORY' => '/uploads/userProfile/',
+    'MEMBER_IMAGE_STORAGE_DIRECTORY' => '/uploads/memberThumbnail/',
     'CIRCLE_IMAGE_STORAGE_DIRECTORY' => '/uploads/circleThumbnail/',
 );

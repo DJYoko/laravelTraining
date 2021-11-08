@@ -23,7 +23,7 @@
         @foreach ($members as $member)
             <div class="p-memberList__member"
                 @if(isset($member->thumbnail_path))
-                style="background-image:url({{config( 'constants.USER_PROFILE_IMAGE_STORAGE_DIRECTORY' )}}{{ $member->thumbnail_path}});"
+                style="background-image:url({{config( 'constants.MEMBER_IMAGE_STORAGE_DIRECTORY' )}}{{ $member->thumbnail_path}});"
                 @endif
             >
                 <a class="p-memberList__memberLink">
