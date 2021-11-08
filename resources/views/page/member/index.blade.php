@@ -5,7 +5,7 @@
 @section('content')
 <div class="container p-memberDetail">
 <h1>プロフィール編集</h1>
-    <form action="{{route('member.edit')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('member.update.save')}}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group">

@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class MemberController extends Controller
 {
-    public function detail()
+    public function updateInput()
     {
         return view('page.member.index');
     }
 
-    public function edit(Request $request)
+    public function updateSave(Request $request)
     {
         $user = Auth::user();
         $newName = $request->input('userName');

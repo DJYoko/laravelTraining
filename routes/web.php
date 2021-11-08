@@ -32,8 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/vote', 'VoteController@home')->name('voteIndex');
 
     Route::prefix('member')->group(function () {
-        Route::get('/', 'MemberController@detail')->name('member.detail');
-        Route::post('/', 'MemberController@edit')->name('member.edit');
+        Route::get('/edit', 'MemberController@updateInput')->name('member.update.input');
+        Route::post('/edit', 'MemberController@updateSave')->name('member.update.save');
     });
 
     Route::prefix('circle')->group(function () {
