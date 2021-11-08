@@ -154,6 +154,22 @@ class CircleController extends Controller
         if (!isset($afterCirclePath)) {
             $messages['circlePath'] = 'URLを入力してください';
         }
+
+        $theCircle = Circle::where('circles.path', '=', $beforeCirclePath)->first();
+        if (!isset($theCircle)) {
+            $messages['circleNotFound'] = '対象のサークルは存在しません';
+        }
+
+        $thumbnailPath = '';
+
+        if ($request->circleImage) {
+            $file = $request->circleImage;
+            $imageExtension = $request->file('circleImage')->extension();
+            $thumbnailPath = strval($theCircle->id) . '_' .time() . '.' . $imageExtension;
+            $storagePath = public_path(config('constants.CIRCLE_IMAGE_STORAGE_DIRECTORY'));
+            $file->move($storagePath, $thumbnailPath);
+        }
+
         // バリデーション抵触時、エラーメッセージをつけて入力画面を再表示
         if (!empty($messages)) {
             $params['messages'] = $messages;
@@ -169,6 +185,7 @@ class CircleController extends Controller
             Circle::where('circles.path', '=', $beforeCirclePath)->update([
                 'name' => $circleName,
                 'path' => $afterCirclePath,
+                'thumbnail_path' => $thumbnailPath,
                 'description' => $circleDescription,
             ]);
             DB::commit();
