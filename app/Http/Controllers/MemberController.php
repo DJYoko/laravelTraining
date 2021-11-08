@@ -18,13 +18,13 @@ class MemberController extends Controller
     {
         $user = Auth::user();
         $newName = $request->input('userName');
-        $thumbnailPath = '';
-
-        if ($file = $request->memberImage) {
+        $thumbnailPath = $user->thumbnail_path;
+        if (!is_null($request->memberImage)) {
+            $theFile = $request->memberImage;
             $imageExtension = $request->file('memberImage')->extension();
             $thumbnailPath = strval($user->id) . '_' .time() . '.' . $imageExtension;
             $storagePath = public_path(config('constants.MEMBER_IMAGE_STORAGE_DIRECTORY'));
-            $file->move($storagePath, $thumbnailPath);
+            $theFile->move($storagePath, $thumbnailPath);
         }
 
         if (!is_null($newName)) {
