@@ -1,65 +1,16 @@
 {
   "private": true,
   "scripts": {
-    "browserTest": "mocha ./tests/browserTest --recursive --timeout 30000",
-    "storybook": "start-storybook",
-    "dev": "npm run development",
-    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch": "npm run development -- --watch",
-    "watch-poll": "npm run watch -- --watch-poll",
-    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "dev": "mix",
+    "watch": "mix watch",
     "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "production": "mix --production"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@typescript-eslint/eslint-plugin": "^1.11.0",
-    "@typescript-eslint/parser": "^1.11.0",
-    "@vue/eslint-config-prettier": "^4.0.1",
-    "@vue/eslint-config-typescript": "^4.0.0",
-    "axios": "^0.21.4",
-    "babel-loader": "^8.0.6",
-    "babel-preset-vue": "^2.0.2",
-    "cross-env": "^5.1",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.3.0",
-    "eslint-plugin-import": "^2.17.3",
-    "eslint-plugin-node": "^9.1.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-vue": "^5.2.2",
-    "glob": "^7.1.4",
-    "json-loader": "^0.5.7",
-    "laravel-mix": "^4.0.7",
-    "lodash": "^4.17.21",
-    "mocha": "^6.2.0",
-    "prettier": "^1.18.2",
-    "resolve-url-loader": "^2.3.1",
-    "sass": "^1.15.2",
-    "sass-loader": "^7.1.0",
-    "selenium-webdriver": "^4.0.0-alpha.5",
-    "storybook": "^1.0.0",
-    "ts-loader": "^6.0.2",
-    "typescript": "^3.5.1",
-    "vue": "^2.5.17",
-    "vue-loader": "^15.7.0",
-    "vue-router": "^3.0.6",
-    "vue-template-compiler": "^2.6.10",
-    "vuex": "^3.1.1",
-    "webdriverio": "^5.13.0"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
-  "dependencies": {
-    "css-loader": "^3.0.0",
-    "dayjs": "^1.8.15",
-    "dotenv": "^8.1.0",
-    "file-loader": "^4.0.0",
-    "node-sass": "^4.14.1",
-    "scss-loader": "0.0.1",
-    "style-loader": "^0.23.1",
-    "vue-cli": "^2.9.6"
+    "cross-env": "^7.0.3",
+    "laravel-mix": "^6.0.39",
+    "resolve-url-loader": "^4.0.0",
+    "sass": "^1.45.2",
+    "sass-loader": "^12.1.0"
   }
 }
