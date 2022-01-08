@@ -17,18 +17,18 @@
     @csrf
     <div class="form-group">
         <label for="circleName">表示名</label>
-        <input type="text" class="form-control" id="circleName" aria-describedby="circleNameHelp" placeholder="表示名" name="circleName" value="{{ \Auth::user()->name}}">
+        <input type="text" class="form-control" id="circleName" aria-describedby="circleNameHelp" placeholder="表示名" name="circleName" value="{{ \Auth::user()->name}}のサークル">
         <small id="circleNameHelp" class="form-text text-muted">表示されるサークル名を入力します</small>
     </div>
     <div class="form-group">
         <label for="circleDescription">説明</label>
-        <input type="text" class="form-control" id="circleDescription" aria-describedby="circleDescriptionHelp" placeholder="表示名" name="circleDescription" value="{{ \Auth::user()->name}}">
+        <input type="text" class="form-control" id="circleDescription" aria-describedby="circleDescriptionHelp" placeholder="表示名" name="circleDescription" value="{{ \Auth::user()->name}}が作成したサークルです">
         <small id="circleDescriptionHelp" class="form-text text-muted">サークル概要を入力します</small>
     </div>
     <div class="form-group">
-        <label for="circlePath">URL</label>
-        <input type="text" class="form-control" id="circlePath" aria-describedby="circlePathHelp" placeholder="表示名" name="circlePath" value="{{ \Auth::user()->name}}">
-        <small id="circlePathHelp" class="form-text text-muted">当サイト内でのURLを入力します<br>例） http://????.com/circle/この部分</small>
+        <label for="circlePath">Path</label>
+        <input type="text" class="form-control" id="circlePath" aria-describedby="circlePathHelp" placeholder="表示名" name="circlePath" value="">
+        <small id="circlePathHelp" class="form-text text-muted">当サイト内でのURLを入力します<br>例） http://????.com/circle/<strong>[この部分]</strong></small>
     </div>
     <div class="form-group">
         <label for="circleImage">アイコン画像</label>
