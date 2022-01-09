@@ -37,4 +37,6 @@
     </form>
   </div>
   <div id="app">{{-- React build test --}}</div>
+  <script src="/js/page/auth/login/index.js"></script>
+
 @endsection
