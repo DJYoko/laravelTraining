@@ -6,7 +6,11 @@
                     style="background-image:url({{config( 'constants.CIRCLE_IMAGE_STORAGE_DIRECTORY' ) . $circle->thumbnail_path}});"
                 @endif
             >
-                <p class="p-circleList__circleName">{{$circle->name}}</p>
+                <p class="p-circleList__circleName">
+                  <span class="p-circleList__circleNameText">
+                    {{$circle->name}}
+                  </span>
+                </p>
             </a>
         </div>
     @endforeach
