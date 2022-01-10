@@ -5,8 +5,8 @@ class PageAuthLogin extends React.Component {
   render() {
     return (
       <p>resources\components\page\auth\login\index.jsx
-        <br />{this.props.actionUrl}
-        <br />{this.props.csrfToken}
+        <br />props.actionUrl {this.props.actionUrl}
+        <br />props.csrfToken {this.props.csrfToken}
       </p>
     );
   }
@@ -15,6 +15,11 @@ class PageAuthLogin extends React.Component {
 PageAuthLogin.propTypes = {
   actionUrl: PropTypes.string,
   csrfToken: PropTypes.string
+};
+
+PageAuthLogin.defaultProps = {
+  actionUrl: '',
+  csrfToken: '',
 };
 
 export default PageAuthLogin;
