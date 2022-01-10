@@ -1,4 +1,4 @@
 import React from 'react';
 
-const PageAuthLogin = () => <p>resources\components\page\auth\login\index.jsx</p>;
+const PageAuthLogin = (props) => <p>resources\components\page\auth\login\index.jsx {props.actionUrl} {props.csrfToken}</p>;
 export default PageAuthLogin;

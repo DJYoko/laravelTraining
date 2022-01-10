@@ -36,7 +36,9 @@
       </div>
     </form>
   </div>
-  <div id="app">{{-- React build test --}}</div>
+  <div id="react-loginForm" data-csrf-token="{{ csrf_token() }}" data-action-url="{{ route('login') }}">
+    {{-- React build test --}}
+  </div>
   <script src="/js/page/auth/login/index.js"></script>
 
 @endsection
