@@ -49,7 +49,8 @@
       <div class="text-center">
         <button type="submit" value="send" class="btn btn-primary">{{ __('Register') }}</button>
       </div>
-      <div id="react-registerForm"></div>
+      <div id="react-registerForm" data-csrf-token="{{ csrf_token() }}" data-action-url="{{ route('register') }}">
+      </div>
   </div>
 @endsection
 @section('js')
