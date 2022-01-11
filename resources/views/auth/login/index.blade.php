@@ -22,7 +22,7 @@
       {{-- React build test --}}
     </div>
   </div>
-
+@section('js')
   <script src="/js/page/auth/login/index.js"></script>
-
+@endsection
 @endsection
