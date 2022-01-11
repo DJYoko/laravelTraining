@@ -22,8 +22,10 @@ mix.webpackConfig({
   },
 });
 
-mix.sass('resources/css/app.scss', 'public/css');
-mix.js(
-  'resources/js/page/auth/login/index.js',
-  'public/js/page/auth/login/index.js'
-);
+mix.sass('resources/css/app.scss', 'public/css').version();
+mix
+  .js(
+    'resources/js/page/auth/login/index.js',
+    'public/js/page/auth/login/index.js'
+  )
+  .version();

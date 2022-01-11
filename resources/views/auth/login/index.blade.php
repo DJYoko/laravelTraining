@@ -23,6 +23,6 @@
     </div>
   </div>
 @section('js')
-  <script src="/js/page/auth/login/index.js"></script>
+  <script src="{{ mix('js/page/auth/login/index.js') }}"></script>
 @endsection
 @endsection
