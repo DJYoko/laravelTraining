@@ -28,4 +28,8 @@ mix
     'resources/js/page/auth/login/index.js',
     'public/js/page/auth/login/index.js'
   )
+  .js(
+    'resources/js/page/auth/register/index.js',
+    'public/js/page/auth/register/index.js'
+  )
   .version();

@@ -49,5 +49,9 @@
       <div class="text-center">
         <button type="submit" value="send" class="btn btn-primary">{{ __('Register') }}</button>
       </div>
+      <div id="react-registerForm"></div>
   </div>
+@endsection
+@section('js')
+  <script src="{{ mix('js/page/auth/register/index.js') }}"></script>
 @endsection
