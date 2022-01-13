@@ -14,16 +14,31 @@ class PageAuthRegister extends React.Component {
   render() {
     return (
       <form action={this.props.actionUrl} method="post">
-        resources\components\page\auth\register\index.jsx
         <input type="hidden" name="_token" value={this.props.csrfToken} />
+        <div className="list-group">
+          <div className="list-group-item">
+            UserName
+            <input
+              type="text"
+              name="name"
+              size="30"
+              defaultValue={this.props.name}
+            />
+            <p className="alert alert-danger">
+              {this.getErrorMessageByKey('name').join('\n')}
+            </p>
+          </div>
+        </div>
       </form>
     );
   }
   getErrorMessageByKey(key) {
-    if (typeof this.props.errorMessages[key] === 'undefined') {
+    const messages = JSON.parse(this.props.errorMessages);
+    console.log(messages[key], key);
+    if (typeof messages[key] === 'undefined') {
       return [];
     }
-    this.props.errorMessages[key];
+    return messages[key];
   }
 }
 
