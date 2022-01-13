@@ -16,7 +16,7 @@
       <div class="list-group">
         <div class="list-group-item">
           {{ __('UserName') }}
-          <input type="text" name="name" size="30">
+          <input type="text" name="name" size="30" value="{{ old('name') }}">
           @if (!empty($errors->first('name')))
             <p class="alert alert-danger">{{ $errors->first('name') }}</p>
           @endif
@@ -24,7 +24,7 @@
 
         <div class="list-group-item">
           {{ __('Email') }}
-          <input type="text" name="email" size="30">
+          <input type="text" name="email" size="30" value="{{ old('name') }}">
           @if (!empty($errors->first('email')))
             <p class="alert alert-danger">{{ $errors->first('email') }}</p>
           @endif
@@ -49,8 +49,11 @@
       <div class="text-center">
         <button type="submit" value="send" class="btn btn-primary">{{ __('Register') }}</button>
       </div>
-      <div id="react-registerForm" data-csrf-token="{{ csrf_token() }}" data-action-url="{{ route('register') }}">
+      <div id="react-registerForm" data-csrf-token="{{ csrf_token() }}" data-action-url="{{ route('register') }}"
+        data-user-name="{{ old('name') }}" data-user-email="{{ old('email') }}"
+        data-error-messages="@include('parts.errorMessagesJson')">
       </div>
+    </form>
   </div>
 @endsection
 @section('js')
