@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ErrorMessages from '@resources/components/parts/ErrorMessages';
 
 class PageAuthRegister extends React.Component {
   constructor(props) {
@@ -24,9 +25,9 @@ class PageAuthRegister extends React.Component {
               size="30"
               defaultValue={this.props.name}
             />
-            <p className="alert alert-danger">
-              {this.getErrorMessageByKey('name').join('\n')}
-            </p>
+            <ErrorMessages
+              messages={this.getErrorMessageByKey('name')}
+            ></ErrorMessages>
           </div>
         </div>
       </form>
