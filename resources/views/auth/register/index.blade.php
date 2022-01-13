@@ -50,8 +50,8 @@
         <button type="submit" value="send" class="btn btn-primary">{{ __('Register') }}</button>
       </div>
       <div id="react-registerForm" data-csrf-token="{{ csrf_token() }}" data-action-url="{{ route('register') }}"
-        data-user-name="{{ old('name') }}" data-user-email="{{ old('email') }}"
-        data-error-messages="@include('parts.errorMessagesJson')">
+        data-name="{{ old('name') }}" data-email="{{ old('email') }}"
+        data-error-messages="@include('parts.errorMessagesJson', ['displayErrors' => $errors->getMessages()])">
       </div>
     </form>
   </div>
