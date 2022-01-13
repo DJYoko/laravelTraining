@@ -19,16 +19,24 @@ class PageAuthRegister extends React.Component {
       </form>
     );
   }
+  getErrorMessageByKey(key) {
+    if (typeof this.props.errorMessages[key] === 'undefined') {
+      return [];
+    }
+    this.props.errorMessages[key];
+  }
 }
 
 PageAuthRegister.propTypes = {
   actionUrl: PropTypes.string,
   csrfToken: PropTypes.string,
+  errorMessages: PropTypes.string,
 };
 
 PageAuthRegister.defaultProps = {
   actionUrl: '',
   csrfToken: '',
+  errorMessages: {},
 };
 
 export default PageAuthRegister;
