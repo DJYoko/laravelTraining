@@ -9,7 +9,7 @@ class PageAuthRegister extends React.Component {
       name: '',
       email: '',
       password: '',
-      password_confirmation: '',
+      passwordConfirmation: '',
     };
   }
   render() {
@@ -30,6 +30,43 @@ class PageAuthRegister extends React.Component {
             ></ErrorMessages>
           </div>
         </div>
+        <div className="list-group">
+          <div className="list-group-item">
+            Email
+            <input
+              type="text"
+              name="email"
+              size="30"
+              defaultValue={this.props.email}
+            />
+            <ErrorMessages
+              messages={this.getErrorMessageByKey('email')}
+            ></ErrorMessages>
+          </div>
+        </div>
+        <div className="list-group">
+          <div className="list-group-item">
+            Password
+            <input
+              type="password"
+              name="password"
+              size="30"
+              defaultValue={this.props.password}
+            />
+            <ErrorMessages
+              messages={this.getErrorMessageByKey('password')}
+            ></ErrorMessages>
+          </div>
+        </div>
+        <div className="list-group">
+          <div className="list-group-item">
+            Password Confirmation
+            <input type="password" name="password_confirmation" size="30" />
+            <ErrorMessages
+              messages={this.getErrorMessageByKey('passwordConfirmation')}
+            ></ErrorMessages>
+          </div>
+        </div>
       </form>
     );
   }
@@ -46,12 +83,16 @@ class PageAuthRegister extends React.Component {
 PageAuthRegister.propTypes = {
   actionUrl: PropTypes.string,
   csrfToken: PropTypes.string,
+  name: PropTypes.string,
+  email: PropTypes.string,
   errorMessages: PropTypes.string,
 };
 
 PageAuthRegister.defaultProps = {
   actionUrl: '',
   csrfToken: '',
+  name: '',
+  email: '',
   errorMessages: {},
 };
 
