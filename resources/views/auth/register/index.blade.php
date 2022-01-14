@@ -1,10 +1,5 @@
 @extends('_layout.base')
 @section('css')
-<style>
-  .red {
-    color: "f66"
-  }
-</style>
 <title>{{ __('Register') }}</title>
 @endsection
 @section('content')
