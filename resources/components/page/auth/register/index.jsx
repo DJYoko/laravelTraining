@@ -41,8 +41,12 @@ class PageAuthRegister extends React.Component {
           <div className="list-group-item">
             Password Confirmation
             <input type="password" name="password_confirmation" size="30" />
-            <ErrorMessages messages={this.getErrorMessageByKey('passwordConfirmation')}></ErrorMessages>
           </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" value="send" class="btn btn-primary">
+            Register
+          </button>
         </div>
       </form>
     );
