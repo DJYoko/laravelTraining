@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div class="container">
-  <h1>{{ __('Login') }}</h1>
+  <h1 class="h1 mb-3">{{ __('Login') }}</h1>
   @if ($errors->any())
   <div class="alert alert-danger">
     @foreach ($errors->all() as $error)
@@ -12,7 +12,11 @@
     @endforeach
   </div>
   @endif
-  <div id="react-loginForm" data-csrf-token="{{ csrf_token() }}" data-action-url="{{ route('login') }}">
+  <div class="list-group">
+    <div class="list-group-item">
+      <div id="react-loginForm" data-csrf-token="{{ csrf_token() }}" data-action-url="{{ route('login') }}">
+      </div>
+    </div>
   </div>
 </div>
 @endsection
