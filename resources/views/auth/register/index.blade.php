@@ -24,7 +24,7 @@
 
         <div class="list-group-item">
           {{ __('Email') }}
-          <input type="text" name="email" size="30" value="{{ old('name') }}">
+          <input type="text" name="email" size="30" value="{{ old('email') }}">
           @if (!empty($errors->first('email')))
             <p class="alert alert-danger">{{ $errors->first('email') }}</p>
           @endif
