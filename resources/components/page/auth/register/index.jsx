@@ -16,32 +16,32 @@ class PageAuthRegister extends React.Component {
     return (
       <form action={this.props.actionUrl} method="post">
         <input type="hidden" name="_token" value={this.props.csrfToken} />
-        <div className="list-group">
-          <div className="list-group-item">
-            UserName
-            <input type="text" name="name" size="30" defaultValue={this.props.name} />
-            <ErrorMessages messages={this.getErrorMessageByKey('name')}></ErrorMessages>
-          </div>
+        <div className="form-group">
+          <label>UserName</label>
+          <input type="text" name="name" size="30" className="form-control" defaultValue={this.props.name} />
+          <ErrorMessages messages={this.getErrorMessageByKey('name')}></ErrorMessages>
         </div>
-        <div className="list-group">
-          <div className="list-group-item">
-            Email
-            <input type="text" name="email" size="30" defaultValue={this.props.email} />
-            <ErrorMessages messages={this.getErrorMessageByKey('email')}></ErrorMessages>
-          </div>
+        <div className="form-group">
+          <label>Email</label>
+          <input type="text" name="email" size="30" className="form-control" defaultValue={this.props.email} />
+          <ErrorMessages messages={this.getErrorMessageByKey('email')}></ErrorMessages>
         </div>
-        <div className="list-group">
-          <div className="list-group-item">
-            Password
-            <input type="password" name="password" size="30" defaultValue={this.props.password} />
-            <ErrorMessages messages={this.getErrorMessageByKey('password')}></ErrorMessages>
-          </div>
+
+        <div className="form-group">
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            size="30"
+            className="form-control"
+            defaultValue={this.props.password}
+          />
+          <ErrorMessages messages={this.getErrorMessageByKey('password')}></ErrorMessages>
         </div>
-        <div className="list-group">
-          <div className="list-group-item">
-            Password Confirmation
-            <input type="password" name="password_confirmation" size="30" />
-          </div>
+
+        <div className="form-group">
+          <label>Password Confirmation</label>
+          <input type="password" name="password_confirmation" size="30" className="form-control" />
         </div>
         <div class="text-center">
           <button type="submit" value="send" class="btn btn-primary">
