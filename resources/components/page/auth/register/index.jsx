@@ -19,52 +19,29 @@ class PageAuthRegister extends React.Component {
         <div className="list-group">
           <div className="list-group-item">
             UserName
-            <input
-              type="text"
-              name="name"
-              size="30"
-              defaultValue={this.props.name}
-            />
-            <ErrorMessages
-              messages={this.getErrorMessageByKey('name')}
-            ></ErrorMessages>
+            <input type="text" name="name" size="30" defaultValue={this.props.name} />
+            <ErrorMessages messages={this.getErrorMessageByKey('name')}></ErrorMessages>
           </div>
         </div>
         <div className="list-group">
           <div className="list-group-item">
             Email
-            <input
-              type="text"
-              name="email"
-              size="30"
-              defaultValue={this.props.email}
-            />
-            <ErrorMessages
-              messages={this.getErrorMessageByKey('email')}
-            ></ErrorMessages>
+            <input type="text" name="email" size="30" defaultValue={this.props.email} />
+            <ErrorMessages messages={this.getErrorMessageByKey('email')}></ErrorMessages>
           </div>
         </div>
         <div className="list-group">
           <div className="list-group-item">
             Password
-            <input
-              type="password"
-              name="password"
-              size="30"
-              defaultValue={this.props.password}
-            />
-            <ErrorMessages
-              messages={this.getErrorMessageByKey('password')}
-            ></ErrorMessages>
+            <input type="password" name="password" size="30" defaultValue={this.props.password} />
+            <ErrorMessages messages={this.getErrorMessageByKey('password')}></ErrorMessages>
           </div>
         </div>
         <div className="list-group">
           <div className="list-group-item">
             Password Confirmation
             <input type="password" name="password_confirmation" size="30" />
-            <ErrorMessages
-              messages={this.getErrorMessageByKey('passwordConfirmation')}
-            ></ErrorMessages>
+            <ErrorMessages messages={this.getErrorMessageByKey('passwordConfirmation')}></ErrorMessages>
           </div>
         </div>
       </form>

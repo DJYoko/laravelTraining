@@ -7,9 +7,7 @@ class ErrorMessages extends React.Component {
       return null;
     }
 
-    return (
-      <p className="alert alert-danger">{this.props.messages.join('\n')}</p>
-    );
+    return <p className="alert alert-danger">{this.props.messages.join('\n')}</p>;
   }
 }
 
