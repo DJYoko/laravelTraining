@@ -27,6 +27,11 @@ class LoginTest extends DuskTestCase
         ->assertPresent('@loginFormInputPassword')
         ->assertPresent('@loginFormButtonSubmit')
         ->assertSee('Password');
+
+      // Error case (submit without params)
+      $browser->press('@loginFormButtonSubmit')->waitFor('@loginPageAlert');
+      $browser->assertSee('The email field is required.');
+      $browser->assertSee('The password field is required.');
     });
   }
 }

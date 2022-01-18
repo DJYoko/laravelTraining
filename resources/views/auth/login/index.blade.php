@@ -6,7 +6,7 @@
 <div class="container">
   <h1 class="h1 mb-3">{{ __('Login') }}</h1>
   @if ($errors->any())
-  <div class="alert alert-danger">
+  <div class="alert alert-danger" dusk="loginPageAlert">
     @foreach ($errors->all() as $error)
     <p>{{ $error }}</p>
     @endforeach
