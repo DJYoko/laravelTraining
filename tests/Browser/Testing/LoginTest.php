@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Browser;
+namespace Tests\Browser\Testing;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
@@ -13,10 +13,13 @@ class LoginTest extends DuskTestCase
    *
    * @return void
    */
-  public function testExample()
+  public function testLogin()
   {
     $this->browse(function (Browser $browser) {
-      $browser->visit('/auth/login')
+
+      // visit page.
+      // elements are shown
+      $browser->visit(route('login'))
         ->assertTitle('Login')
         ->waitFor('form')
         ->assertPresent('@loginFormInputToken')
