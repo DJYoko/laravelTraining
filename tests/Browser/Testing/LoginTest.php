@@ -5,15 +5,17 @@ namespace Tests\Browser\Testing;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
+use Tests\Browser\Testing\UtilityTrait;
+use App\Models\User;
+
 
 class LoginTest extends DuskTestCase
 {
+  use UtilityTrait;
   /**
-   * A Dusk test example.
-   *
    * @return void
    */
-  public function testLogin()
+  public function testLoginShowForm()
   {
     $this->browse(function (Browser $browser) {
 
@@ -25,8 +27,22 @@ class LoginTest extends DuskTestCase
         ->assertPresent('@loginFormInputToken')
         ->assertPresent('@loginFormInputEmail')
         ->assertPresent('@loginFormInputPassword')
-        ->assertPresent('@loginFormButtonSubmit')
-        ->assertSee('Password');
+        ->assertPresent('@loginFormButtonSubmit');
+    });
+  }
+
+  /**
+   * @return void
+   */
+  public function testLoginError()
+  {
+    $this->browse(function (Browser $browser) {
+
+      // visit page.
+      // elements are shown
+      $browser->visit(route('login'))
+        ->assertTitle('Login')
+        ->waitFor('form');
 
       // Error case (submit without params)
       $browser->press('@loginFormButtonSubmit')->waitFor('@loginPageAlert');
