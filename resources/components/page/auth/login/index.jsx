@@ -11,11 +11,18 @@ class PageAuthLogin extends React.Component {
   }
   render() {
     return (
-      <form action={this.props.actionUrl} method="post">
-        <input type="hidden" name="_token" value={this.props.csrfToken} />
+      <form action={this.props.actionUrl} method="post" dusk="loginForm">
+        <input type="hidden" name="_token" value={this.props.csrfToken} dusk="loginFormInputToken" />
         <div className="form-group">
           <label>Email</label>
-          <input type="text" className="form-control" name="email" defaultValue={this.state.email} size="30" />
+          <input
+            type="text"
+            className="form-control"
+            name="email"
+            defaultValue={this.state.email}
+            size="30"
+            dusk="loginFormInputEmail"
+          />
         </div>
 
         <div className="form-group">
@@ -26,10 +33,11 @@ class PageAuthLogin extends React.Component {
             name="password"
             defaultValue={this.state.password}
             size="30"
+            dusk="loginFormInputPassword"
           />
         </div>
         <div className="text-center mt-2">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" dusk="loginFormButtonSubmit">
             Login
           </button>
         </div>
