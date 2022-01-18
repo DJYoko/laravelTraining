@@ -17,7 +17,13 @@ class LoginTest extends DuskTestCase
   {
     $this->browse(function (Browser $browser) {
       $browser->visit('/auth/login')
-        ->assertTitle('Login');
+        ->assertTitle('Login')
+        ->waitFor('form')
+        ->assertPresent('@loginFormInputToken')
+        ->assertPresent('@loginFormInputEmail')
+        ->assertPresent('@loginFormInputPassword')
+        ->assertPresent('@loginFormButtonSubmit')
+        ->assertSee('Password');
     });
   }
 }
