@@ -50,4 +50,27 @@ class RegisterTest extends DuskTestCase
       $browser->assertSee('The password field is required.');
     });
   }
+
+  public function testRegisterSuccess()
+  {
+
+    $this->browse(function (Browser $browser) {
+
+      $randomStr = $this->generateRandomString(8);
+      $tempMailAddress = $randomStr . '@testDomain.com';
+
+      $browser->visit(route('register'))
+        ->waitFor('form');
+
+      $browser->value('@registerFormInputName', $randomStr);
+      $browser->value('@registerFormInputEmail', $tempMailAddress);
+      $browser->value('@registerFormInputPassword', 'password');
+      $browser->value('@registerFormInputPasswordConfirmation', 'password');
+      $browser->press('@registerFormButtonSubmit');
+
+      $url = $browser->driver->getCurrentURL();
+      $expectedUrl = route('indexHome');
+      $this->assertEquals($expectedUrl, $url);
+    });
+  }
 }
