@@ -31,7 +31,6 @@ class RegisterTest extends DuskTestCase
     });
   }
 
-
   /**
    * @return void
    */
