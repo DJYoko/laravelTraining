@@ -14,8 +14,7 @@ a sample application for Circle member activity.
 - Auth
 - Model
 - Locale (use Cookie, custom middleware)
-- Selenium (testing, describe by mochajs) - abort.
-- Dusk (testing) - under construction.
+- Dusk (testing)
 
 ## Version & Environment
 - Laravel: 8.0
