@@ -14,16 +14,30 @@ class PageAuthRegister extends React.Component {
   }
   render() {
     return (
-      <form action={this.props.actionUrl} method="post">
-        <input type="hidden" name="_token" value={this.props.csrfToken} />
+      <form action={this.props.actionUrl} method="post" dusk="registerForm">
+        <input type="hidden" dusk="registerFormInputToken" name="_token" value={this.props.csrfToken} />
         <div className="form-group">
           <label>UserName</label>
-          <input type="text" name="name" size="30" className="form-control" defaultValue={this.props.name} />
+          <input
+            type="text"
+            dusk="registerFormInputName"
+            name="name"
+            size="30"
+            className="form-control"
+            defaultValue={this.props.name}
+          />
           <ErrorMessages messages={this.getErrorMessageByKey('name')}></ErrorMessages>
         </div>
         <div className="form-group">
           <label>Email</label>
-          <input type="text" name="email" size="30" className="form-control" defaultValue={this.props.email} />
+          <input
+            type="text"
+            dusk="registerFormInputEmail"
+            name="email"
+            size="30"
+            className="form-control"
+            defaultValue={this.props.email}
+          />
           <ErrorMessages messages={this.getErrorMessageByKey('email')}></ErrorMessages>
         </div>
 
@@ -31,6 +45,7 @@ class PageAuthRegister extends React.Component {
           <label>Password</label>
           <input
             type="password"
+            dusk="registerFormInputPassword"
             name="password"
             size="30"
             className="form-control"
@@ -41,10 +56,16 @@ class PageAuthRegister extends React.Component {
 
         <div className="form-group">
           <label>Password Confirmation</label>
-          <input type="password" name="password_confirmation" size="30" className="form-control" />
+          <input
+            type="password"
+            dusk="registerFormInputPasswordConfirmation"
+            name="password_confirmation"
+            size="30"
+            className="form-control"
+          />
         </div>
         <div class="text-center">
-          <button type="submit" value="send" class="btn btn-primary">
+          <button type="submit" value="send" class="btn btn-primary" dusk="registerFormButtonSubmit">
             Register
           </button>
         </div>
