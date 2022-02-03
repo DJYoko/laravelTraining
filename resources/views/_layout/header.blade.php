@@ -1,5 +1,5 @@
-<header class="bg-light pt-3 pb-1">
-  <div class="container py-5">
+<header class="bg-light">
+  <div class="container py-3">
     <ul class="nav">
       <li class="nav-item"><a href="{{ route('topIndex') }}">トップ</a></li>
       @if(Auth::check())
@@ -21,10 +21,6 @@
   </div>
 </header>
 <style>
-  .nav {
-    margin-bottom: 20px;
-  }
-
   .nav-item {
     display: inline-block;
     margin-left: 20px;

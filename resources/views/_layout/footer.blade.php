@@ -1,5 +1,5 @@
-<footer class="footer bg-light py-5">
-  <div class="container py-5">
-    <p>this area is footer.</p>
+<footer class="footer bg-light">
+  <div class="container py-3">
+    <address>this area is footer.</address>
   </div>
 </footer>
