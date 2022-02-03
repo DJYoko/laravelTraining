@@ -1,5 +1,6 @@
 @extends('_layout.base')
 @section('css')
+<title>サークル登録</title>
 @endsection
 
 @section('content')
