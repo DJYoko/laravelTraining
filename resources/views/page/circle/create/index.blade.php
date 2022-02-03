@@ -8,9 +8,11 @@
   <h1>サークル登録</h1>
 
   @if(isset($messages))
-  <div class="alert alert-danger">
-    @foreach($messages as $message)
-    <div>{{ $message}}</div>
+  <div class="alert alert-danger" dusk="circleCreatePageAlert">
+    @foreach($messages as $key=> $message)
+    @if($key == 'circlePath' || $key == 'circleName')
+    <div>{{ $message }}</div>
+    @endif
     @endforeach
   </div>
   @endif
@@ -18,7 +20,7 @@
     <input type="hidden" name="_token" value="{{ csrf_token() }}" dusk="circleCreateFormInputToken" />
 
     <div class="form-group">
-      <label for="circleName">表示名</label>
+      <label for="circleName">名前</label>
       <input type="text" class="form-control" id="circleName" aria-describedby="circleNameHelp" placeholder="表示名" name="circleName" value="{{ \Auth::user()->name}}のサークル" dusk="circleCreateFormInputName">
       <small id="circleNameHelp" class="form-text text-muted">表示されるサークル名を入力します</small>
     </div>
@@ -28,7 +30,7 @@
       <small id=" circleDescriptionHelp" class="form-text text-muted">サークル概要を入力します</small>
     </div>
     <div class="form-group">
-      <label for="circlePath">Path</label>
+      <label for="circlePath">URL</label>
       <input type="text" class="form-control" id="circlePath" aria-describedby="circlePathHelp" placeholder="表示名" name="circlePath" value="" dusk="circleCreateFormInputPath">
       <small id="circlePathHelp" class="form-text text-muted">当サイト内でのURLを入力します<br>例） http://????.com/circle/<strong>[この部分]</strong></small>
     </div>
