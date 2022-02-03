@@ -56,17 +56,21 @@ class LoginTest extends DuskTestCase
    */
   public function testLoginSuccess()
   {
-    $randomStr = $this->generateRandomString(8);
-    $tempMailAddress = $randomStr . '@testDomain.com';
+    $testUserName = config('testing.userName');
+    $testUserEmail = config('testing.userEmail');
+    $testUserPasswordInput = config('testing.userPasswordInput');
 
-    // create testing user
-    User::create([
-      'name' => $randomStr,
-      'email' => $tempMailAddress,
-      'password' => bcrypt('password'),
-    ]);
+    $testUser = User::where('users.email', '=', $testUserEmail)->first();
+    if (is_null($testUser)) {
+      // create testing user
+      User::create([
+        'name' => $testUserName,
+        'email' => $testUserEmail,
+        'password' => bcrypt($testUserPasswordInput),
+      ]);
+    }
 
-    $this->browse(function (Browser $browser) use ($tempMailAddress) {
+    $this->browse(function (Browser $browser) use ($testUserEmail, $testUserPasswordInput) {
 
       // visit page.
       // elements are shown
@@ -75,8 +79,8 @@ class LoginTest extends DuskTestCase
         ->waitFor('form');
 
       // login as testing user
-      $browser->value('@loginFormInputEmail', $tempMailAddress);
-      $browser->value('@loginFormInputPassword', 'password');
+      $browser->value('@loginFormInputEmail', $testUserEmail);
+      $browser->value('@loginFormInputPassword', $testUserPasswordInput);
       $browser->press('@loginFormButtonSubmit');
 
       $url = $browser->driver->getCurrentURL();
