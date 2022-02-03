@@ -228,9 +228,4 @@ return [
     'View' => Illuminate\Support\Facades\View::class,
 
   ],
-
-  // DUSK testing
-  'testUserName' => env('DUSK_TEST_USER_NAME', 'duskTestAccount'),
-  'testUserEmail' => env('DUSK_TEST_USER_EMAIL', 'test@test.com'),
-  'testUserPasswordInput' => env('DUSK_TEST_USER_PASSWORD', 'password'),
 ];
