@@ -22,7 +22,13 @@ class CircleTest extends DuskTestCase
       // elements are shown
       $browser->visit(route('circle.create.input'))
         ->assertTitle('サークル登録')
-        ->waitFor('form');
+        ->waitFor('form')
+        ->assertPresent('@circleCreateFormInputToken')
+        ->assertPresent('@circleCreateFormInputName')
+        ->assertPresent('@circleCreateFormInputDescription')
+        ->assertPresent('@circleCreateFormInputPath')
+        ->assertPresent('@circleCreateFormInputImage')
+        ->assertPresent('@circleCreateFormButtonSubmit');
     });
   }
 }
