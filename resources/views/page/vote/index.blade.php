@@ -1,5 +1,5 @@
 @extends('_layout.base') @section('css') @endsection @section('content')
-<div class="container">
+<div class="container py-5">
   <h1>Home</h1>
   @if(Auth::check()) Hello {{ \Auth::user()->name}}
 
@@ -42,12 +42,7 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">target vote ids</label>
         <div class="col-sm-7">
-          <input
-            class="form-control"
-            type="text"
-            id="delete-target-ids"
-            placeholder="ex:) 1,2"
-          />
+          <input class="form-control" type="text" id="delete-target-ids" placeholder="ex:) 1,2" />
         </div>
         <div class="col-sm-2">
           <button class="btn btn-danger" type="button">

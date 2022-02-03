@@ -3,7 +3,7 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container py-5">
   <h1 dusk="memberHomePageTitle">ログインしました</h1>
   <ul>
     <li><a href="{{route('member.update.input')}}">プロフィール編集</a></li>

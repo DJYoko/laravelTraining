@@ -3,7 +3,7 @@
 <title>{{ __('Login') }}</title>
 @endsection
 @section('content')
-<div class="container">
+<div class="container py-5">
   <h1 class="h1 mb-3">{{ __('Login') }}</h1>
   @if ($errors->any())
   <div class="alert alert-danger" dusk="loginPageAlert">

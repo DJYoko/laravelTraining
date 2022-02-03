@@ -3,9 +3,9 @@
 @endsection
 
 @section('content')
-<div class="container">
-<h1>サークル内容更新</h1>
-更新完了
+<div class="container py-5">
+  <h1>サークル内容更新</h1>
+  更新完了
 </div>
 @endsection
 
