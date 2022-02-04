@@ -45,4 +45,11 @@ trait UtilityTrait
       $browser->press('@loginFormButtonSubmit');
     });
   }
+
+  public function logoutTestingUser()
+  {
+    $this->browse(function (Browser $browser) {
+      $browser->visit(route('logout'));
+    });
+  }
 }

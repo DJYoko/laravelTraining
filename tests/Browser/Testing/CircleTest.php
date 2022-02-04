@@ -17,9 +17,6 @@ class CircleTest extends DuskTestCase
 
     $this->loginAsTestingUser();
     $this->browse(function (Browser $browser) {
-
-      // visit page.
-      // elements are shown
       $browser->visit(route('circle.create.input'))
         ->assertTitle('サークル登録')
         ->waitFor('form')
@@ -30,6 +27,8 @@ class CircleTest extends DuskTestCase
         ->assertPresent('@circleCreateFormInputImage')
         ->assertPresent('@circleCreateFormButtonSubmit');
     });
+
+    $this->logoutTestingUser();
   }
 
   public function testCircleCreateFailed()
@@ -37,9 +36,6 @@ class CircleTest extends DuskTestCase
 
     $this->loginAsTestingUser();
     $this->browse(function (Browser $browser) {
-
-      // visit page.
-      // elements are shown
       $browser->visit(route('circle.create.input'))
         ->assertTitle('サークル登録')
         ->waitFor('form');
@@ -52,5 +48,7 @@ class CircleTest extends DuskTestCase
       $browser->assertSee('名前を入力してください');
       $browser->assertSee('URLを入力してください');
     });
+
+    $this->logoutTestingUser();
   }
 }
