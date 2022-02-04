@@ -29,7 +29,6 @@ trait UtilityTrait
 
     $testUser = User::where('users.email', '=', $testUserEmail)->first();
     if (is_null($testUser)) {
-      // create testing user
       User::create([
         'name' => $testUserName,
         'email' => $testUserEmail,
@@ -38,13 +37,9 @@ trait UtilityTrait
     }
 
     $this->browse(function (Browser $browser) use ($testUserEmail, $testUserPasswordInput) {
-
-      // visit page.
-      // elements are shown
       $browser->visit(route('login'))
         ->waitFor('form');
 
-      // login as testing user
       $browser->value('@loginFormInputEmail', $testUserEmail);
       $browser->value('@loginFormInputPassword', $testUserPasswordInput);
       $browser->press('@loginFormButtonSubmit');
