@@ -42,7 +42,6 @@ trait UtilityTrait
       // visit page.
       // elements are shown
       $browser->visit(route('login'))
-        ->assertTitle('Login')
         ->waitFor('form');
 
       // login as testing user
