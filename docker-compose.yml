@@ -32,7 +32,6 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
       - MYSQL_TESTING_DATABASE=${DB_TESTING_DATABASE}
-      - DB_SOCKET=/var/run/mysqld/mysqld.sock
     ports:
       - 3306:3306
 
@@ -50,18 +49,12 @@ services:
     build:
       context: ./docker/php-fpm
     environment:
-      DB_HOST: laraveldevdb
-      DB_PORT: ${DB_PORT}
-      DB_DATABASE: ${DB_DATABASE}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
       REDIS_HOST: laraveldevredis
       XDEBUG_FRONT_PORT: ${XDEBUG_FRONT_PORT}
       XDEBUG_COMMON_IDEKEY: ${XDEBUG_COMMON_IDEKEY}
       XDEBUG_COMMON_REMOTE_HOST: ${XDEBUG_COMMON_REMOTE_HOST}
     volumes:
       - ./:/work:cached
-      - dbsocket:/var/run/mysqld
     ports:
       - 9010:9000
     networks:
@@ -72,7 +65,6 @@ services:
 volumes:
   laraveldevdb-data:
     driver: local
-  dbsocket:
   sync-laraveldevapp-dev:
     external: true
 
