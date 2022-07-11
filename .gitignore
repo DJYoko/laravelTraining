@@ -20,3 +20,5 @@ composer.phar
 chromedriver.exe
 mix-manifest.json
 .phpunit.result.cache
+
+/docker/mysql/laraveldevdb-data

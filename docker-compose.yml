@@ -1,0 +1,81 @@
+version: '3.7'
+services:
+  # アプリケーションサーバ
+  laraveldevnginx:
+    container_name: laraveldevnginx
+    image: nginx
+    depends_on:
+      - laraveldevapp
+    ports:
+      - 3500:80
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./:/work:cached
+    networks:
+      # - default
+      - laraveldevnet
+
+  # DB
+  laraveldevdb:
+    hostname: laraveldevdb
+    container_name: laraveldevdb
+    build:
+      context: ./docker/mysql
+    volumes:
+      - ./docker/mysql/laraveldevdb-data:/var/lib/mysql:cached
+    networks:
+      - default
+      - laraveldevnet
+    environment:
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_TESTING_DATABASE=${DB_TESTING_DATABASE}
+      - DB_SOCKET=/var/run/mysqld/mysqld.sock
+    ports:
+      - 3306:3306
+
+  # Redis
+  laraveldevredis:
+    container_name: laraveldevredis
+    image: redis:alpine
+    networks:
+      - default
+      - laraveldevnet
+
+  # アプリケーション
+  laraveldevapp:
+    container_name: laraveldevapp
+    build:
+      context: ./docker/php-fpm
+    environment:
+      DB_HOST: laraveldevdb
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      REDIS_HOST: laraveldevredis
+      XDEBUG_FRONT_PORT: ${XDEBUG_FRONT_PORT}
+      XDEBUG_COMMON_IDEKEY: ${XDEBUG_COMMON_IDEKEY}
+      XDEBUG_COMMON_REMOTE_HOST: ${XDEBUG_COMMON_REMOTE_HOST}
+    volumes:
+      - ./:/work:cached
+      - dbsocket:/var/run/mysqld
+    ports:
+      - 9010:9000
+    networks:
+      # - default
+      - laraveldevnet
+    working_dir: /work
+
+volumes:
+  laraveldevdb-data:
+    driver: local
+  dbsocket:
+  sync-laraveldevapp-dev:
+    external: true
+
+networks:
+  laraveldevnet:
+    driver: bridge
