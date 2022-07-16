@@ -19,7 +19,7 @@ class RegisterTest extends DuskTestCase
       // visit page.
       // elements are shown
       $browser->visit(route('register'))
-        ->assertTitle('Register')
+        ->assertTitle('Register' . ' | ' . config('app.name'))
         ->waitFor('form')
         ->assertPresent('@registerForm')
         ->assertPresent('@registerFormInputToken')

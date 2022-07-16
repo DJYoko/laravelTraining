@@ -22,7 +22,7 @@ class LoginTest extends DuskTestCase
       // visit page.
       // elements are shown
       $browser->visit(route('login'))
-        ->assertTitle('Login')
+        ->assertTitle('Login' . ' | ' . config('app.name'))
         ->waitFor('form')
         ->assertPresent('@loginFormInputToken')
         ->assertPresent('@loginFormInputEmail')

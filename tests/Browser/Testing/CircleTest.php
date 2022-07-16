@@ -18,7 +18,7 @@ class CircleTest extends DuskTestCase
     $this->loginAsTestingUser();
     $this->browse(function (Browser $browser) {
       $browser->visit(route('circle.create.input'))
-        ->assertTitle('サークル登録')
+        ->assertTitle('サークル登録' . ' | ' . config('app.name'))
         ->waitFor('form')
         ->assertPresent('@circleCreateFormInputToken')
         ->assertPresent('@circleCreateFormInputName')
@@ -37,7 +37,7 @@ class CircleTest extends DuskTestCase
     $this->loginAsTestingUser();
     $this->browse(function (Browser $browser) {
       $browser->visit(route('circle.create.input'))
-        ->assertTitle('サークル登録')
+        ->assertTitle('サークル登録' . ' | ' . config('app.name'))
         ->waitFor('form');
 
       $browser->value('@circleCreateFormInputName', '');
