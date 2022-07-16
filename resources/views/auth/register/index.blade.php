@@ -1,7 +1,4 @@
-@extends('_layout.base')
-@section('css')
-<title>{{ __('Register') }}</title>
-@endsection
+@extends('_layout.base', ['title' => __('Register')])
 @section('content')
 <div class="container py-5">
   <h1 class="h1 mb-3">{{ __('Register') }}</h1>

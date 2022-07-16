@@ -1,6 +1,4 @@
-@extends('_layout.base')
-@section('css')
-@endsection
+@extends('_layout.base', ['title' => サークル登録完了])
 
 @section('content')
 <div class="container py-5">

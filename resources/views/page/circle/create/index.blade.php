@@ -1,7 +1,4 @@
-@extends('_layout.base')
-@section('css')
-<title>サークル登録</title>
-@endsection
+@extends('_layout.base', ['title' => 'サークル登録'])
 
 @section('content')
 <div class="container py-5">

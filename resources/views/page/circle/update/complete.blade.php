@@ -1,6 +1,5 @@
-@extends('_layout.base')
-@section('css')
-@endsection
+@extends('_layout.base', ['title' => 'サークル内容更新完了'])
+
 
 @section('content')
 <div class="container py-5">

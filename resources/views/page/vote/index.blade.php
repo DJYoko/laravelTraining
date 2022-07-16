@@ -1,4 +1,5 @@
-@extends('_layout.base') @section('css') @endsection @section('content')
+@extends('_layout.base')
+@section('content')
 <div class="container py-5">
   <h1>Home</h1>
   @if(Auth::check()) Hello {{ \Auth::user()->name}}

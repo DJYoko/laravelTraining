@@ -1,6 +1,4 @@
-@extends('_layout.base')
-@section('css')
-@endsection
+@extends('_layout.base', ['title' => $circle->name . ' | サークル詳細 | '])
 
 @section('content')
 <div class="container py-5">

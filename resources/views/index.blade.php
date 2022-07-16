@@ -1,6 +1,4 @@
 @extends('_layout.base')
-@section('css')
-@endsection
 
 @section('content')
 <div class="container py-5">
