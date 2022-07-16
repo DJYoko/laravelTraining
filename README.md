@@ -15,6 +15,7 @@ a sample application for Circle member activity.
 - Model
 - Locale (use Cookie, custom middleware)
 - Dusk (testing)
+- Laravel Mix (build React & SCSS)
 
 ## Version & Environment
 - Laravel: 8.0
