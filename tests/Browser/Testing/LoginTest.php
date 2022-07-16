@@ -41,7 +41,7 @@ class LoginTest extends DuskTestCase
       // visit page.
       // elements are shown
       $browser->visit(route('login'))
-        ->assertTitle('Login')
+        ->assertTitle('Login' . ' | ' . config('app.name'))
         ->waitFor('form');
 
       // Error case (submit without params)
@@ -75,7 +75,7 @@ class LoginTest extends DuskTestCase
       // visit page.
       // elements are shown
       $browser->visit(route('login'))
-        ->assertTitle('Login')
+        ->assertTitle('Login' . ' | ' . config('app.name'))
         ->waitFor('form');
 
       // login as testing user
