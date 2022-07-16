@@ -28,13 +28,12 @@
   }
 </style>
 <script>
-  $(function() {
-    $('#set-lang').on('change', function() {
-      const selectedLanguage = $(this).val();
-      if (selectedLanguage === 'default') {
-        return false;
-      }
-      location.href = "/lang/" + selectedLanguage;
-    });
+  const $selectLanguage = document.getElementById('set-lang');
+  $selectLanguage.addEventListener('change', function() {
+    const selectedLanguage = $selectLanguage.value;
+    if (selectedLanguage === 'default') {
+      return false;
+    }
+    location.href = '/lang/' + selectedLanguage;
   });
 </script>
