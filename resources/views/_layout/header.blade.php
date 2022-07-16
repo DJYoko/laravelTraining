@@ -1,9 +1,9 @@
 <header class="bg-light">
   <div class="container py-3">
     <ul class="nav">
-      <li class="nav-item"><a href="{{ route('topIndex') }}">トップ</a></li>
+      <li class="nav-item"><a href="{{ route('topIndex') }}">{{ __('Top') }}</a></li>
       @if(Auth::check())
-      <li class="nav-item"><a href="{{ route('indexHome') }}">マイページ</a></li>
+      <li class="nav-item"><a href="{{ route('indexHome') }}">{{ __('MyPage') }}</a></li>
       <li class="nav-item">{{ \Auth::user()->name}}</li>
       <li class="nav-item"><a href="{{ route('logout') }}">{{ __('Logout') }}</a></li>
       @else
