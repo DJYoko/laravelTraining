@@ -7,6 +7,11 @@
   @yield('css')
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   @include('_layout.head')
+  @if(isset($title))
+  <title>{{ $title }} | {{ config('app.name') }}</title>
+  @else
+  <title>{{ config('app.name') }}</title>
+  @endif
 </head>
 
 <body>
