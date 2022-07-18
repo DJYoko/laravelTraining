@@ -10,6 +10,11 @@
     <div class="p-memberDetail-memberThumbnail" @if(isset($thumbnailPath)) style="background-image:url({{$thumbnailPath}});" @endif></div>
   </div>
 
+  <div class="form-group mt-5">
+    <h2>{{__('CirclesThatTheUserTakesPartIn', ['userName' => $userName ])}}</h2>
+    @include('parts.circleList', ['_circles' => $targetCircles])
+  </div>
+
 </div>
 @endsection
 

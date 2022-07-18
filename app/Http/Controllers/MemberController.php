@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Circle;
 
 class MemberController extends Controller
 {
@@ -31,10 +31,18 @@ class MemberController extends Controller
       $thumbnailPath = config('constants.MEMBER_IMAGE_STORAGE_DIRECTORY') . $operatingUser->thumbnail_path;
     }
 
+    // Circles that the target User takes part in.
+    $targetCircles = Circle::orderBy('created_at', 'desc')
+      ->join('circle_members', 'circles.id', '=', 'circle_members.circle_id')
+      ->where('circle_members.user_id', $userId)
+      ->select('circles.*')
+      ->get();
+
     return view('page.member.detail.index', [
       'userName' => $displayUser->name,
       'thumbnailPath' => $thumbnailPath,
-      'isOwner' => $operatingUser->id === $userId
+      'isOwner' => $operatingUser->id === $userId,
+      'targetCircles' => $targetCircles
     ]);
   }
 
