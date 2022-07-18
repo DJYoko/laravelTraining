@@ -23,7 +23,7 @@
       style="background-image:url({{config( 'constants.MEMBER_IMAGE_STORAGE_DIRECTORY' )}}{{ $member->thumbnail_path}});"
       @endif
       >
-      <a class="p-memberList__memberLink">
+      <a class="p-memberList__memberLink" href="{{ route('member.detail', ['userId' => $member->id]) }}">
         <div class="p-memberList__memberName">name: {{$member->name}}</div>
       </a>
     </div>

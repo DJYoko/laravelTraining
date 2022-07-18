@@ -14,201 +14,201 @@ use Illuminate\Support\Facades\DB;
 
 class CircleController extends Controller
 {
-    public function index()
-    {
-        $allCircles = Circle::orderBy('created_at', 'desc')->get();
-        return view('page.circle.index', [
-            'circles' => $allCircles,
-        ]);
+  public function index()
+  {
+    $allCircles = Circle::orderBy('created_at', 'desc')->get();
+    return view('page.circle.index', [
+      'circles' => $allCircles,
+    ]);
+  }
+
+  public function createInput(Request $request)
+  {
+    return view('page.circle.create.index');
+  }
+
+  public function circleDetail($circlePath, Request $request)
+  {
+    $params = [];
+    $theCircle = Circle::where('circles.path', '=', $circlePath)->first();
+    if (is_null($theCircle)) {
+      return  response()->view('page.error.404', $params, 404);
+    }
+    $params['circle'] = $theCircle;
+    $circleId =  $theCircle->id;
+
+    // メンバー取得
+    $theCircleMembers = User::Join('circle_members', 'circle_members.user_id', '=', 'users.id')
+      ->where('circle_members.circle_id', '=', $circleId)
+      ->select('users.id', 'users.thumbnail_path')
+      ->get();
+    $params['members'] = $theCircleMembers;
+
+    // 自分が編集権限を持っているサークルであるかどうかを確認してビューに渡す
+    $params['isEditable'] = false;
+
+    // ログインしていなければスルー
+    $user = Auth::user();
+    if (!is_null($user)) {
+      $userId = $user->id;
+      //$circleId
+      $params['isEditable'] = CircleMember::isEditable($circleId, $userId);
     }
 
-    public function createInput(Request $request)
-    {
-        return view('page.circle.create.index');
+    return view('page.circle.detail.index', $params);
+  }
+
+
+  public function createSave(Request $request)
+  {
+    $user = Auth::user();
+    $userId = $user->id;
+
+    $circleName = $request->input('circleName');
+    $circlePath = $request->input('circlePath');
+    $circleDescription = !empty($request->input('circleDescription')) ? $request->input('circleDescription') : '';
+
+    $messages = [];
+    if (!isset($circleName)) {
+      $messages['circleName'] = '名前を入力してください';
+    }
+    if (!isset($circlePath)) {
+      $messages['circlePath'] = 'URLを入力してください';
     }
 
-    public function circleDetail($circlePath, Request $request)
-    {
-        $params = [];
-        $theCircle = Circle::where('circles.path', '=', $circlePath)->first();
-        if (is_null($theCircle)) {
-            return  response()->view('page.error.404', $params, 404);
-        }
-        $params['circle'] = $theCircle;
-        $circleId =  $theCircle->id;
+    $thumbnailPath = '';
 
-        // メンバー取得
-        $theCircleMembers = User::Join('circle_members', 'circle_members.user_id', '=', 'users.id')
-            ->select('*')
-            ->where('circle_members.circle_id', '=', $circleId)
-            ->get();
-        $params['members'] = $theCircleMembers;
-
-        // 自分が編集権限を持っているサークルであるかどうかを確認してビューに渡す
-        $params['isEditable'] = false;
-
-        // ログインしていなければスルー
-        $user = Auth::user();
-        if (!is_null($user)) {
-            $userId = $user->id;
-            //$circleId
-            $params['isEditable'] = CircleMember::isEditable($circleId, $userId);
-        }
-
-        return view('page.circle.detail.index', $params);
+    if ($request->circleImage) {
+      $file = $request->circleImage;
+      $imageExtension = $request->file('circleImage')->extension();
+      $thumbnailPath = strval($user->id) . '_' . time() . '.' . $imageExtension;
+      $storagePath = public_path(config('constants.CIRCLE_IMAGE_STORAGE_DIRECTORY'));
+      $file->move($storagePath, $thumbnailPath);
     }
 
+    // ほかにバリデーション項目があればここに加筆
 
-    public function createSave(Request $request)
-    {
-        $user = Auth::user();
-        $userId = $user->id;
+    DB::beginTransaction();
+    try {
+      // TODO 登録処理
+      $newCircle = new Circle();
+      $newCircle->name  = $circleName;
+      $newCircle->path = $circlePath;
+      $newCircle->create_user_id = $userId;
+      $newCircle->thumbnail_path = $thumbnailPath;
+      $newCircle->description = $circleDescription;
+      $newCircle->save();
 
-        $circleName = $request->input('circleName');
-        $circlePath = $request->input('circlePath');
-        $circleDescription = !empty($request->input('circleDescription')) ? $request->input('circleDescription') : '';
+      // 新設したサークルに、作成ユーザーをメンバーとして登録
+      $newCircleId = $newCircle->id;
+      $newCircleMember = new CircleMember();
+      $newCircleMember->user_id = $userId;
+      $newCircleMember->circle_id = $newCircleId;
+      $newCircleMember->role = CircleMemberRole::OWNER();
 
-        $messages = [];
-        if (!isset($circleName)) {
-            $messages['circleName'] = '名前を入力してください';
-        }
-        if (!isset($circlePath)) {
-            $messages['circlePath'] = 'URLを入力してください';
-        }
+      // TODO role 割り当て
+      $newCircleMember->save();
 
-        $thumbnailPath = '';
-
-        if ($request->circleImage) {
-            $file = $request->circleImage;
-            $imageExtension = $request->file('circleImage')->extension();
-            $thumbnailPath = strval($user->id) . '_' .time() . '.' . $imageExtension;
-            $storagePath = public_path(config('constants.CIRCLE_IMAGE_STORAGE_DIRECTORY'));
-            $file->move($storagePath, $thumbnailPath);
-        }
-
-        // ほかにバリデーション項目があればここに加筆
-
-        DB::beginTransaction();
-        try {
-            // TODO 登録処理
-            $newCircle = new Circle();
-            $newCircle->name  = $circleName;
-            $newCircle->path = $circlePath;
-            $newCircle->create_user_id = $userId;
-            $newCircle->thumbnail_path = $thumbnailPath;
-            $newCircle->description = $circleDescription;
-            $newCircle->save();
-
-            // 新設したサークルに、作成ユーザーをメンバーとして登録
-            $newCircleId = $newCircle->id;
-            $newCircleMember = new CircleMember();
-            $newCircleMember->user_id = $userId;
-            $newCircleMember->circle_id = $newCircleId;
-            $newCircleMember->role = CircleMemberRole::OWNER();
-
-            // TODO role 割り当て
-            $newCircleMember->save();
-
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            $messages['SQL'] = $e;
-        }
-
-        // バリデーション抵触時、エラーメッセージをつけて入力画面を再表示
-        if (!empty($messages)) {
-            return view('page.circle.create.index', [
-                'messages' => $messages
-            ]);
-        }
-
-        return view('page.circle.create.complete');
+      DB::commit();
+    } catch (\Exception $e) {
+      DB::rollBack();
+      $messages['SQL'] = $e;
     }
 
-    public function updateInput($circlePath, Request $request)
-    {
-        $params = [];
-        $theCircle = Circle::where('circles.path', '=', $circlePath)->first();
-
-        $user = Auth::user();
-        $userId = $user->id;
-
-        $params = [];
-        $params['circle'] = $theCircle;
-
-        return view('page.circle.update.index', $params);
+    // バリデーション抵触時、エラーメッセージをつけて入力画面を再表示
+    if (!empty($messages)) {
+      return view('page.circle.create.index', [
+        'messages' => $messages
+      ]);
     }
 
-    public function updateSave($beforeCirclePath, Request $request)
-    {
-        $params = [];
+    return view('page.circle.create.complete');
+  }
 
-        $circleName = $request->input('circleName');
-        $afterCirclePath = $request->input('circlePath');
-        $circleDescription = !empty($request->input('circleDescription')) ? $request->input('circleDescription') : '';
+  public function updateInput($circlePath, Request $request)
+  {
+    $params = [];
+    $theCircle = Circle::where('circles.path', '=', $circlePath)->first();
 
-        $messages = [];
-        if (!isset($circleName)) {
-            $messages['circleName'] = '名前を入力してください';
-        }
-        if (!isset($afterCirclePath)) {
-            $messages['circlePath'] = 'URLを入力してください';
-        }
+    $user = Auth::user();
+    $userId = $user->id;
 
-        $theCircle = Circle::where('circles.path', '=', $beforeCirclePath)->first();
-        if (!isset($theCircle)) {
-            $messages['circleNotFound'] = '対象のサークルは存在しません';
-        }
+    $params = [];
+    $params['circle'] = $theCircle;
 
-        $thumbnailPath = '';
+    return view('page.circle.update.index', $params);
+  }
 
-        if ($request->circleImage) {
-            $file = $request->circleImage;
-            $imageExtension = $request->file('circleImage')->extension();
-            $thumbnailPath = strval($theCircle->id) . '_' .time() . '.' . $imageExtension;
-            $storagePath = public_path(config('constants.CIRCLE_IMAGE_STORAGE_DIRECTORY'));
-            $file->move($storagePath, $thumbnailPath);
-        }
+  public function updateSave($beforeCirclePath, Request $request)
+  {
+    $params = [];
 
-        // バリデーション抵触時、エラーメッセージをつけて入力画面を再表示
-        if (!empty($messages)) {
-            $params['messages'] = $messages;
-            $params['circle'] = [];
-            $params['circle']['name'] = $circleName;
-            $params['circle']['path'] = $beforeCirclePath;
-            $params['circle']['description'] = $circleDescription;
-            return view('page.circle.update.index', $params);
-        }
+    $circleName = $request->input('circleName');
+    $afterCirclePath = $request->input('circlePath');
+    $circleDescription = !empty($request->input('circleDescription')) ? $request->input('circleDescription') : '';
 
-        DB::beginTransaction();
-        try {
-            Circle::where('circles.path', '=', $beforeCirclePath)->update([
-                'name' => $circleName,
-                'path' => $afterCirclePath,
-                'thumbnail_path' => $thumbnailPath,
-                'description' => $circleDescription,
-            ]);
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            $messages['SQL'] = $e;
-        }
-
-        // バリデーション抵触時、エラーメッセージをつけて入力画面を再表示
-        if (!empty($messages)) {
-            $params['messages'] = $messages;
-            $params['circle'] = [];
-            $params['circle']['name'] = $circleName;
-            $params['circle']['path'] = $beforeCirclePath;
-            $params['circle']['description'] = $circleDescription;
-            return view('page.circle.update.index', $params);
-        }
-
-        $params['circle'] = [];
-        $params['circle']['name'] = $circleName;
-        $params['circle']['path'] = $afterCirclePath;
-        $params['circle']['description'] = $circleDescription;
-
-        return view('page.circle.update.complete', $params);
+    $messages = [];
+    if (!isset($circleName)) {
+      $messages['circleName'] = '名前を入力してください';
     }
+    if (!isset($afterCirclePath)) {
+      $messages['circlePath'] = 'URLを入力してください';
+    }
+
+    $theCircle = Circle::where('circles.path', '=', $beforeCirclePath)->first();
+    if (!isset($theCircle)) {
+      $messages['circleNotFound'] = '対象のサークルは存在しません';
+    }
+
+    $thumbnailPath = '';
+
+    if ($request->circleImage) {
+      $file = $request->circleImage;
+      $imageExtension = $request->file('circleImage')->extension();
+      $thumbnailPath = strval($theCircle->id) . '_' . time() . '.' . $imageExtension;
+      $storagePath = public_path(config('constants.CIRCLE_IMAGE_STORAGE_DIRECTORY'));
+      $file->move($storagePath, $thumbnailPath);
+    }
+
+    // バリデーション抵触時、エラーメッセージをつけて入力画面を再表示
+    if (!empty($messages)) {
+      $params['messages'] = $messages;
+      $params['circle'] = [];
+      $params['circle']['name'] = $circleName;
+      $params['circle']['path'] = $beforeCirclePath;
+      $params['circle']['description'] = $circleDescription;
+      return view('page.circle.update.index', $params);
+    }
+
+    DB::beginTransaction();
+    try {
+      Circle::where('circles.path', '=', $beforeCirclePath)->update([
+        'name' => $circleName,
+        'path' => $afterCirclePath,
+        'thumbnail_path' => $thumbnailPath,
+        'description' => $circleDescription,
+      ]);
+      DB::commit();
+    } catch (\Exception $e) {
+      DB::rollBack();
+      $messages['SQL'] = $e;
+    }
+
+    // バリデーション抵触時、エラーメッセージをつけて入力画面を再表示
+    if (!empty($messages)) {
+      $params['messages'] = $messages;
+      $params['circle'] = [];
+      $params['circle']['name'] = $circleName;
+      $params['circle']['path'] = $beforeCirclePath;
+      $params['circle']['description'] = $circleDescription;
+      return view('page.circle.update.index', $params);
+    }
+
+    $params['circle'] = [];
+    $params['circle']['name'] = $circleName;
+    $params['circle']['path'] = $afterCirclePath;
+    $params['circle']['description'] = $circleDescription;
+
+    return view('page.circle.update.complete', $params);
+  }
 }
