@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
   Route::get('/vote', 'VoteController@home')->name('voteIndex');
 
   Route::prefix('member')->group(function () {
+    Route::get('/detail/{userId}', 'MemberController@showMemberDetail')->where('userId', '[0-9]+')->name('member.detail');
     Route::get('/edit', 'MemberController@updateInput')->name('member.update.input');
     Route::post('/edit', 'MemberController@updateSave')->name('member.update.save');
   });

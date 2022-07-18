@@ -6,12 +6,36 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class MemberController extends Controller
 {
   public function updateInput()
   {
     return view('page.member.index');
+  }
+
+  public function showMemberDetail(int $userId)
+  {
+    $displayUser = User::where('id', $userId)->first();
+
+    // no matched User
+    if (is_null($displayUser)) {
+      abort(404);
+    }
+
+    $operatingUser = Auth::user();
+
+    $thumbnailPath = null;
+    if (isset($operatingUser->thumbnail_path)) {
+      $thumbnailPath = config('constants.MEMBER_IMAGE_STORAGE_DIRECTORY') . $operatingUser->thumbnail_path;
+    }
+
+    return view('page.member.detail.index', [
+      'userName' => $displayUser->name,
+      'thumbnailPath' => $thumbnailPath,
+      'isOwner' => $operatingUser->id === $userId
+    ]);
   }
 
   public function updateSave(Request $request)
