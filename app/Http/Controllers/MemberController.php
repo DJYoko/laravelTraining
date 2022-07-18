@@ -32,10 +32,10 @@ class MemberController extends Controller
     }
 
     // Circles that the target User takes part in.
-    $targetCircles = Circle::orderBy('created_at', 'desc')
+    $targetCircles = Circle::orderBy('circles.created_at', 'desc')
       ->join('circle_members', 'circles.id', '=', 'circle_members.circle_id')
       ->where('circle_members.user_id', $userId)
-      ->select('circles.*')
+      ->select('circles.id', 'circles.name', 'circles.path', 'circles.thumbnail_path')
       ->get();
 
     return view('page.member.detail.index', [
