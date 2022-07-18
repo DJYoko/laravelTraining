@@ -14,7 +14,8 @@ a sample application for Circle member activity.
 - Auth
 - Model
 - Locale (use Cookie, custom middleware)
-- Dusk (testing)
+- Dusk (Chromium)
+- Laravel Mix (build React & SCSS)
 
 ## Version & Environment
 - Laravel: 8.0
@@ -22,6 +23,6 @@ a sample application for Circle member activity.
 - MySQL: 8.0.15
 - nginx
 - Editor: Visual Studio Codes
-- Java: 11.0.4 - abort.
 - React JSX
 - NodeJS & npm
+- Docker
