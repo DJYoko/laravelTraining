@@ -71,7 +71,9 @@
       "@php artisan key:generate --ansi"
     ],
     "exec-dusk": [
-      "@php artisan dusk --filter circle && php artisan dusk --filter login && php artisan dusk --filter register"
+      "@php artisan dusk --filter circle",
+      "@php artisan dusk --filter login",
+      "@php artisan dusk --filter register"
     ]
   },
   "extra": {
