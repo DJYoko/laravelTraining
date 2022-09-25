@@ -3,13 +3,10 @@
 @section('content')
 <div class="container py-5">
   <h1>サークル登録</h1>
-
-  @if(isset($messages))
+  @if ($errors->any())
   <div class="alert alert-danger" dusk="circleCreatePageAlert">
-    @foreach($messages as $key=> $message)
-    @if($key == 'circlePath' || $key == 'circleName')
-    <div>{{ $message }}</div>
-    @endif
+    @foreach ($errors->all() as $error)
+    <div>{{ $error }}</div>
     @endforeach
   </div>
   @endif
