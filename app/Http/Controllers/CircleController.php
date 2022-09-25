@@ -68,36 +68,24 @@ class CircleController extends Controller
     $user = Auth::user();
     $userId = $user->id;
 
-    $circleName = $request->input('circleName');
-    $circlePath = $request->input('circlePath');
-    $circleDescription = !empty($request->input('circleDescription')) ? $request->input('circleDescription') : '';
-
-    $messages = [];
-    if (!isset($circleName)) {
-      $messages['circleName'] = '名前を入力してください';
-    }
-    if (!isset($circlePath)) {
-      $messages['circlePath'] = 'URLを入力してください';
-    }
+    $circleDescription = !empty($validatedRequest->input('circleDescription')) ? $validatedRequest->input('circleDescription') : '';
 
     $thumbnailPath = '';
-
-    if ($request->circleImage) {
-      $file = $request->circleImage;
-      $imageExtension = $request->file('circleImage')->extension();
-      $thumbnailPath = strval($user->id) . '_' . time() . '.' . $imageExtension;
+    if ($validatedRequest->circleImage) {
+      $file = $validatedRequest->circleImage;
+      $imageExtension = $validatedRequest->file('circleImage')->extension();
+      $thumbnailPath = strval($userId) . '_' . time() . '.' . $imageExtension;
       $storagePath = public_path(config('constants.CIRCLE_IMAGE_STORAGE_DIRECTORY'));
       $file->move($storagePath, $thumbnailPath);
     }
 
-    // ほかにバリデーション項目があればここに加筆
-
+    $errors = [];
     DB::beginTransaction();
     try {
       // TODO 登録処理
       $newCircle = new Circle();
-      $newCircle->name  = $circleName;
-      $newCircle->path = $circlePath;
+      $newCircle->name  = $validatedRequest->input('circleName');
+      $newCircle->path = $validatedRequest->input('circlePath');
       $newCircle->create_user_id = $userId;
       $newCircle->thumbnail_path = $thumbnailPath;
       $newCircle->description = $circleDescription;
@@ -116,13 +104,13 @@ class CircleController extends Controller
       DB::commit();
     } catch (\Exception $e) {
       DB::rollBack();
-      $messages['SQL'] = $e;
+      $errors['SQL'] = $e;
     }
 
-    // バリデーション抵触時、エラーメッセージをつけて入力画面を再表示
-    if (!empty($messages)) {
+    // SHOW SQL ERROR
+    if (!empty($errors)) {
       return view('page.circle.create.index', [
-        'messages' => $messages
+        'errors' => $errors
       ]);
     }
 
