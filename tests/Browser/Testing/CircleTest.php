@@ -45,8 +45,8 @@ class CircleTest extends DuskTestCase
       $browser->value('@circleCreateFormInputPath', '');
       $browser->press('@circleCreateFormButtonSubmit');
       $browser->waitFor('@circleCreatePageAlert');
-      $browser->assertSee('名前を入力してください');
-      $browser->assertSee('URLを入力してください');
+      $browser->assertSee('The Circle Name field is required.');
+      $browser->assertSee('The Circle URL field is required.');
     });
 
     $this->logoutTestingUser();
