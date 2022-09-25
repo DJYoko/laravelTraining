@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Request\Circle\CircleCreateRequest;
 
 class CircleController extends Controller
 {
@@ -59,8 +60,11 @@ class CircleController extends Controller
   }
 
 
-  public function createSave(Request $request)
+  public function createSave(CircleCreateRequest $request)
   {
+
+    $validatedRequest = $request->validated();
+
     $user = Auth::user();
     $userId = $user->id;
 
