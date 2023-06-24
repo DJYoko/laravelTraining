@@ -11,7 +11,7 @@
     "artesaos/seotools": "^0.20.2",
     "bilfeldt/laravel-http-client-logger": "^1.0",
     "fideloper/proxy": "^4.4",
-    "firebase/php-jwt": "^5.5",
+    "firebase/php-jwt": "^6.0",
     "fruitcake/laravel-cors": "^2.0",
     "guzzlehttp/guzzle": "^7.0.1",
     "laravel/framework": "^8.54",
